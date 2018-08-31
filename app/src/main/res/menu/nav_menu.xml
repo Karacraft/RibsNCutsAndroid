@@ -7,32 +7,32 @@
 
         <item
             android:id="@+id/nav_all"
-            android:icon="@drawable/ic_dashboard_24"
+            android:icon="@drawable/ic_dashboard_black_24"
             android:title="@string/menu_all"
             app:actionViewClass="android.widget.TextView"
             />
 
         <item
             android:id="@+id/nav_beef"
-            android:icon="@drawable/ic_beef_24"
+            android:icon="@drawable/ic_beef_black_24"
             android:title="@string/menu_beef"
             app:actionViewClass="android.widget.TextView"
             />
         <item
             android:id="@+id/nav_mutton"
-            android:icon="@drawable/ic_mutton_24"
+            android:icon="@drawable/ic_mutton_gray_24"
             android:title="@string/menu_mutton"
             app:actionViewClass="android.widget.TextView"
             />
 
         <!--<item-->
             <!--android:id="@+id/nav_chicken"-->
-            <!--android:icon="@drawable/ic_chicken_24"-->
+            <!--android:icon="@drawable/ic_chicken_black_24"-->
             <!--android:title="@string/menu_chicken" />-->
 
         <item
             android:id="@+id/nav_address"
-            android:icon="@drawable/ic_home_24"
+            android:icon="@drawable/ic_home_black_24"
             android:title="@string/menu_address" />
 
         <item

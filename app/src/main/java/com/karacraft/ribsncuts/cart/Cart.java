@@ -20,6 +20,11 @@ public class Cart
         items = new ArrayList<Item>();
     }
 
+    public boolean isEmpty()
+    {
+        return  items.isEmpty();
+    }
+
     public Item getItem(int position)
     {
         return items.get(position);
@@ -27,16 +32,16 @@ public class Cart
 
     public void addItem(Item item)
     {
-        if (items.contains(item))
+        if(inRecord(item))
         {
             increaseItem(item);
             Log.d(TAG, "Increasing already added item...");
-        } else
+        }
+        else
         {
             items.add(item);
             Log.d(TAG, "New Item added...");
         }
-
     }
 
     public void removeItem(Item item)
@@ -144,4 +149,19 @@ public class Cart
     {
         return items;
     }
+
+    private boolean inRecord(Item item)
+    {
+        int rowId = item.getId();
+
+        for (Item i :
+                items)
+        {
+            if (i.getId() == rowId)
+                return true;
+        }
+
+        return false;
+    }
+
 }

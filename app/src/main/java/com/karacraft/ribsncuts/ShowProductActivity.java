@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +29,7 @@ import static com.karacraft.ribsncuts.helper.Constants.TAG;
 public class ShowProductActivity extends Fragment
 {
 
-    IMainActivityInterface myInterface;
+    ICartUpdated myInterface;
 
     Button btnAddToCart;
     ImageView ivProduct;
@@ -77,7 +76,7 @@ public class ShowProductActivity extends Fragment
         Picasso
                 .get()
                 .load(Constants.IMAGE_URL + product.getImage())
-                .placeholder(R.drawable.ic_ribsncuts)
+                .placeholder(R.drawable.ic_ribsncuts_white)
 //                .resize(960,617)
 //                .resize(1080,694)
                 .into(ivProduct);
@@ -101,7 +100,7 @@ public class ShowProductActivity extends Fragment
             public void onClick(View view)
             {
                 controller.addItem(item);
-                myInterface.cartIsUpdated(controller.getCartSize());
+                myInterface.OnCartUpdate(controller.getCartSize());
                 CustomToast.showToastMessage(item.getTitle() +" added to cart.", getContext(), Toast.LENGTH_SHORT);
                 Log.d(TAG, "Cart Items[Unique]: " + controller.getUniqueItems() + " Items[Total]: " + controller.getTotalItems() + " Price: " + controller.getTotalPrice());
             }
@@ -127,9 +126,9 @@ public class ShowProductActivity extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        if ( getActivity() instanceof IMainActivityInterface)
+        if ( getActivity() instanceof ICartUpdated)
         {
-            myInterface = (IMainActivityInterface) getActivity();
+            myInterface = (ICartUpdated) getActivity();
         }
     }
 }

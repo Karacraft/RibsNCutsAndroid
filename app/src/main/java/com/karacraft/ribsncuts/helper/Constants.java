@@ -2,15 +2,16 @@ package com.karacraft.ribsncuts.helper;
 
 public class Constants
 {
+    public static final String IP_LOCAL = "http://192.168.0.100/";
 //    public static final String PRODUCT_URL = "http://ribsncuts.com/api/products";
-    public static final String PRODUCT_URL = "http://192.168.0.106/ribsncuts/public/api/products";
-    public static final String LATEST_URL = "http://ribsncuts.com/api/latest";
+    public static final String PRODUCT_URL = IP_LOCAL +  "ribsncuts/public/api/products";
+    public static final String LATEST_URL = IP_LOCAL +  "api/latest";
 //    public static final String LOGIN_URL = "http://ribsncuts.com/api/login";
-    public static final String LOGIN_URL = "http://192.168.0.106/ribsncuts/public/api/login";
+    public static final String LOGIN_URL = IP_LOCAL +  "ribsncuts/public/api/login";
 //    public static final String DETAILS_URL = "http://ribsncuts.com/api/details";
-    public static final String DETAILS_URL = "http://192.168.0.106/ribsncuts/public/api/details";
+    public static final String DETAILS_URL = IP_LOCAL +  "ribsncuts/public/api/details";
 //    public static final String REGISTER_URL = "http://ribsncuts.com/api/register";
-    public static final String REGISTER_URL = "http://192.168.0.106/ribsncuts/public/api/register";
+    public static final String REGISTER_URL = IP_LOCAL +  "ribsncuts/public/api/register";
     public static final String IMAGE_URL = "https://ribsncuts.com/images/products/";
 
     /** Application Preferences*/
@@ -23,10 +24,6 @@ public class Constants
     public static final String USER_NAME ="user_name";
 
     public static final String TAG = "kcraftpk@gmail.com";
-
-    public static final String REQUEST_METHOD_GET = "GET";
-    public static final int READ_TIMEOUT = 15000;
-    public static final int CONNECTION_TIMEOUT = 15000;
 
     /** For ProductAdapter */
     public static final String LIST_FULL = "list_full";

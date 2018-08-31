@@ -40,11 +40,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,IMainActivityInterface,AsyncHttpConnectionTask.AsyncHCTCallback
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,ICartUpdated,AsyncHttpConnectionTask.AsyncHCTCallback
 {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     ProgressDialog progressDialog;
+    Controller controller;
 
     Toolbar toolbar;
     DrawerLayout drawer;
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int countNumber;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.base);
 
         /** Get Global Controller Class object (See applicaiton tag in anrdroidmanifest.xml )*/
-        final Controller controller = (Controller) getApplicationContext();
+        controller = (Controller) getApplicationContext();
 
         /** Setup Toolbar */
         toolbar = findViewById(R.id.main_toolbar); //In toolbar_main.xml
@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     public void initializeCountDrawer(int iAll, int iBeef, int iMutton)
     {
-
         //Gravity property aligns the text
         all.setGravity(Gravity.CENTER_VERTICAL);
         all.setTypeface(null, Typeface.BOLD);
@@ -245,7 +244,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        /** We are not using Extra Menu */
         //noinspection SimplifiableIfStatement
         if (id == R.id.nav_login) {
             showLoginAlertDialog();
@@ -254,18 +252,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_cart){
 
-//            CustomToast.showToastMessage("Clicked",MainActivity.this,Toast.LENGTH_SHORT);
-//            countNumber++;
-//            setupBadge();
-            CartActivity cartActivity = new CartActivity();
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
-                .addToBackStack(null)
-                    .replace(R.id.main_fragment, cartActivity)
-                    .commit();
+            if (controller.isCartEmpty())
+            {
+                CustomToast.showToastMessage("Cart is Empty",MainActivity.this,Toast.LENGTH_SHORT);
+            }
+            else
+            {
 
+                CartActivity cartActivity = (CartActivity) fragmentManager.findFragmentByTag("CartFragment");
+                //if we are on cartActivity , then gracefully don't reply to click
+                if (cartActivity == null)
+                {
+                    cartActivity = new CartActivity();
+                    fragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
+                            .addToBackStack(null)
+                            .replace(R.id.main_fragment, cartActivity,"CartFragment")
+                            .commit();
+                }
 
-
+            }
             return true;
         }
 
@@ -449,12 +455,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * @param cartSize
      */
     @Override
-    public void cartIsUpdated(int cartSize)
+    public void OnCartUpdate(int cartSize)
     {
         countNumber = cartSize;
         setupBadge();
     }
-
 
     /**
      * AsyncTask Implemented Interface callBack

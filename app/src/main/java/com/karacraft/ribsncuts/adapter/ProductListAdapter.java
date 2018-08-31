@@ -7,12 +7,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.karacraft.ribsncuts.R;
 import com.karacraft.ribsncuts.helper.Constants;
 import com.karacraft.ribsncuts.model.Product;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class ProductListAdapter extends BaseAdapter {
 
@@ -66,7 +66,7 @@ public class ProductListAdapter extends BaseAdapter {
         Picasso
                 .get()
                 .load(Constants.IMAGE_URL + products.get(position).getImage())
-                .placeholder(R.drawable.ic_ribsncuts)
+                .placeholder(R.drawable.ic_ribsncuts_white)
 //                .resize(960,617)
 //                .resize(1080,694)
                 .into(img_product_image);

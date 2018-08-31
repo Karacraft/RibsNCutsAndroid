@@ -7,49 +7,60 @@
     >
 
     <LinearLayout
+        android:id="@+id/cart_main_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/colorCommonBorders"
+        android:dividerHeight="4dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/small_padding"
+            android:paddingTop="@dimen/small_padding">
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_weight="1"
+                android:text="Image"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="Title"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Image" />
+                android:text="Qty"
+                android:textColor="@color/colorWhite" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:text="Title" />
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="Qty" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Price" />
+                android:text="Price"
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
 
         <ListView
+            android:visibility="gone"
             android:id="@+id/lv_cart_items"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/colorCommonBorders"
-            android:dividerHeight="2dp">
+            android:dividerHeight="4dp">
 
 
             <!--Required to Show list Items-->
@@ -57,17 +68,100 @@
 
         </ListView>
 
-        <TextView
-            android:id="@+id/empty_cart_items"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:text="Please Refresh, List is Empty"
-            android:textSize="@dimen/medium_font_size" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/small_padding"
+            android:paddingTop="@dimen/small_padding">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_weight="1"
+                android:text="SubTotal"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/tv_cart_subtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="Amount"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/small_padding"
+            android:paddingTop="@dimen/small_padding">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_weight="1"
+                android:text="Grand Total"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/tv_cart_grandtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="Amount"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/medium_margin"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_cart_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Clear Cart"
+                android:theme="@style/AppTheme.ButtonInfo" />
+
+            <Button
+                android:id="@+id/btn_cart_checkout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.ButtonSuccess"
+                android:layout_weight="1"
+                android:text="Check Out" />
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/empty_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="@dimen/large_font_size"
+        android:text="Cart is Empty"
+        />
 
 </FrameLayout>

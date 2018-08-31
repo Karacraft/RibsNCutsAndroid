@@ -55,7 +55,7 @@ public class CartItemListAdapter extends BaseAdapter {
 
         tv_item_title.setText(items.get(position).getTitle());
         tv_item_qty.setText (String.valueOf(items.get(position).getQuantity()));
-        tv_item_price.setText(String.valueOf(items.get(position).getPrice()));
+        tv_item_price.setText(String.valueOf(items.get(position).getPrice()) + " /Kg");
 
         ImageView iv_item_image = v.findViewById(R.id.iv_item_image);
 
@@ -63,7 +63,7 @@ public class CartItemListAdapter extends BaseAdapter {
         Picasso
                 .get()
                 .load(Constants.IMAGE_URL + items.get(position).getImage())
-                .placeholder(R.drawable.ic_ribsncuts)
+                .placeholder(R.drawable.ic_ribsncuts_white)
 //                .resize(960,617)
 //                .resize(1080,694)
                 .into(iv_item_image);

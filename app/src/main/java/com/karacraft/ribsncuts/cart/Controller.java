@@ -20,6 +20,11 @@ public class Controller extends Application
 
     private Cart cart = new Cart();
 
+    public boolean isCartEmpty()
+    {
+        return cart.isEmpty();
+    }
+
     public Item getItem(int position)
     {
         return cart.getItem(position);
