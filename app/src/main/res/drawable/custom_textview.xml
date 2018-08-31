@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke
+        android:width="1dp"
+        android:color="@color/colorCommonBorders"/>
+
+    <solid android:color="@color/colorCustomTextViewBg"/>
+
+    <padding
+        android:left="@dimen/xs_padding"
+        android:right="@dimen/xs_padding"
+        android:top="@dimen/xxs_padding"
+        android:bottom="@dimen/xxs_padding"/>
+
+    <!--<corners android:radius="@dimen/xs_margin"/>-->
+
+</shape>

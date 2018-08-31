@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/small_margin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollIndicators="top|bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_product_title_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="@dimen/small_padding"
+                android:paddingLeft="@dimen/medium_padding"
+                android:paddingTop="@dimen/small_padding"
+                android:text="This is Product Title"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/medium_font_size" />
+
+            <ImageView
+
+                android:id="@+id/iv_product_image_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_product_title_full"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/TextViewDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_product_image_full"
+                android:layout_marginTop="@dimen/small_padding"
+                android:text="Description"
+                android:textAllCaps="true"
+                android:textSize="@dimen/medium_font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_description_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TextViewDesc"
+                android:layout_marginTop="@dimen/small_padding"
+                android:text="Description"
+                android:textSize="@dimen/medium_font_size" />
+
+            <TextView
+                android:id="@+id/TextViewPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_description_full"
+                android:layout_marginTop="@dimen/small_padding"
+                android:text="Price Rs"
+                android:textAllCaps="true"
+                android:textSize="@dimen/medium_font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_price_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TextViewPrice"
+                android:layout_marginTop="@dimen/small_padding"
+                android:text="Rs 600"
+                android:textSize="@dimen/medium_font_size" />
+
+            <Button
+                android:id="@+id/btnAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/tv_price_full"
+                android:text="@string/btnAddToCart"
+                android:theme="@style/AppTheme.ButtonSuccess" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</FrameLayout>

@@ -1,0 +1,24 @@
+<resources>
+
+    <!--Margins-->
+    <dimen name="xxs_margin">2dp</dimen>
+    <dimen name="xs_margin">4dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
+    <dimen name="large_margin">24dp</dimen>
+
+    <!--Padding-->
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="medium_padding">16dp</dimen>
+    <dimen name="large_padding">24dp</dimen>
+    <dimen name="xxs_padding">2dp</dimen>
+    <dimen name="xs_padding">4dp</dimen>
+
+
+
+    <!--Font Size-->
+    <dimen name="base_font_size">12sp</dimen>
+    <dimen name="medium_font_size">16sp</dimen>
+    <dimen name="large_font_size">24sp</dimen>
+
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_all"
+            android:icon="@drawable/ic_dashboard_24"
+            android:title="@string/menu_all"
+            app:actionViewClass="android.widget.TextView"
+            />
+
+        <item
+            android:id="@+id/nav_beef"
+            android:icon="@drawable/ic_beef_24"
+            android:title="@string/menu_beef"
+            app:actionViewClass="android.widget.TextView"
+            />
+        <item
+            android:id="@+id/nav_mutton"
+            android:icon="@drawable/ic_mutton_24"
+            android:title="@string/menu_mutton"
+            app:actionViewClass="android.widget.TextView"
+            />
+
+        <!--<item-->
+            <!--android:id="@+id/nav_chicken"-->
+            <!--android:icon="@drawable/ic_chicken_24"-->
+            <!--android:title="@string/menu_chicken" />-->
+
+        <item
+            android:id="@+id/nav_address"
+            android:icon="@drawable/ic_home_24"
+            android:title="@string/menu_address" />
+
+        <item
+            android:id="@+id/nav_location"
+            android:icon="@drawable/ic_map_black_24dp"
+            android:title="@string/menu_location"/>
+
+        <item
+            android:id="@+id/nav_visit_website"
+            android:icon="@drawable/ic_location_city_black_24dp"
+            android:title="@string/menu_visit_website" />
+
+    </group>
+
+</menu>

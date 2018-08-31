@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.ButtonRedBuy" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/danger</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/large_font_size</item>
+        <item name="android:width">50dp</item>
+        <item name="android:height">50dp</item>
+    </style>
+
+    <style name="AppTheme.ButtonGreenBuy" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/success</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/large_font_size</item>
+        <item name="android:width">50dp</item>
+        <item name="android:height">50dp</item>
+    </style>
+
+    <style name="AppTheme.ButtonSuccess" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/success</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/medium_font_size</item>
+    </style>
+
+    <style name="AppTheme.ButtonInfo" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/primary</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/medium_font_size</item>
+    </style>
+
+    <style name="DialogTheme">
+        <item name="android:windowEnterAnimation">@anim/slidedown</item>
+        <item name="android:windowExitAnimation">@anim/slideup</item>
+    </style>
+
+</resources>

@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Ribs N Cuts</string>
+    <string name="title_activity_all">All Cuts</string>
+    <string name="title_activity_beef">Beef Cuts</string>
+    <string name="title_activity_mutton">Mutton Cuts</string>
+    <string name="title_activity_chicken">Chicken Cuts</string>
+    <string name="title_activity_address">Outlet Address</string>
+    <string name="title_show_product_details">Product Details</string>
+
+    <!--Drawer Menu Text-->
+    <string name="menu_all">All</string>
+    <string name="menu_beef">Beef</string>
+    <string name="menu_mutton">Mutton</string>
+    <string name="menu_chicken">Chicken</string>
+    <string name="menu_address">Address</string>
+    <string name="menu_location">Location Map</string>
+    <string name="menu_visit_website">Visit Website</string>
+
+    <!--Some Other-->
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="address_heading">Address</string>
+    <string name="address_details">Shop# 2, Corner Zakriya Town,\nMain Bossan Road,\nOpposite Chase Up,\nMultan </string>
+    <string name="phone_heading">Contact #</string>
+    <string name="phone_details">0302-2545721 </string>
+
+    <string name="btnAddToCart">Add to Cart</string>
+    <string name="btnPlusBuy">+</string>
+    <string name="btnMinusBuy">-</string>
+
+</resources>

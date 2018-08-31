@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This is the Header, which we see in Navigation Drawer on Top-->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg2"
+    >
+
+    <ImageView
+        android:layout_marginTop="16dp"
+        android:layout_width="75dp"
+        android:layout_height="123dp"
+        android:src="@drawable/ic_ribsncuts" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa_bold"
+        android:textSize="@dimen/medium_font_size"
+        android:layout_margin="@dimen/small_margin"
+        android:text="The Meat Providers"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="bottom"
+        />
+
+</LinearLayout>
