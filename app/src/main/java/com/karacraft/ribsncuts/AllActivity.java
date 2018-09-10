@@ -2,6 +2,7 @@ package com.karacraft.ribsncuts;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -9,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.karacraft.ribsncuts.DB.ProductsDB;
 import com.karacraft.ribsncuts.adapter.ProductListAdapter;
+import com.karacraft.ribsncuts.cart.Controller;
 import com.karacraft.ribsncuts.helper.Constants;
+import com.karacraft.ribsncuts.model.Item;
 import com.karacraft.ribsncuts.model.Product;
 
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ public class AllActivity extends Fragment
     ListView lv_all_products;
     ArrayList<Product> values = new ArrayList<Product>();
     ProductListAdapter adapter;
+    Controller controller;
 
     public AllActivity() {
         // Required empty public constructor
@@ -44,6 +49,9 @@ public class AllActivity extends Fragment
         getActivity().setTitle(R.string.title_activity_all);
         // Inflate the View
         View v =  inflater.inflate(R.layout.fragment_all, container, false);
+
+        /** Get Global Controller Class object (See applicaiton tag in anrdroidmanifest.xml )*/
+        controller = (Controller) getActivity().getApplicationContext();
 
         empty = v.findViewById(R.id.empty_all);
         lv_all_products = v.findViewById(R.id.lv_all_products);

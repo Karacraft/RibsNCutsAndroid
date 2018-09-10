@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,17 +25,16 @@ public class CartActivity extends Fragment
 {
 
     CartItemListAdapter adapter;
-    ICartUpdated myInterface;
+    ICartOperations myInterface;
 
     ListView lv_cart_items;
-    Button btn_cart_clear;
-    Button btn_cart_checkout;
-    TextView tv_cart_subtotal;
-    TextView tv_cart_grandtotal;
     Controller controller;
 
-    LinearLayout layout_cart;
-    TextView tv_cart;
+    TextView tv_CartTotalItems;
+    TextView tv_CartTotalInPkr;
+
+    Button btnCartClear;
+    Button btnCartPlaceOrder;
 
     public CartActivity()
     {
@@ -53,48 +51,36 @@ public class CartActivity extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        layout_cart = view.findViewById(R.id.cart_main_layout);
-        layout_cart.setVisibility(View.VISIBLE);
-
-        tv_cart = view.findViewById(R.id.empty_cart);
-        tv_cart.setVisibility(View.GONE);
-
         lv_cart_items = view.findViewById(R.id.lv_cart_items);
         lv_cart_items.setVisibility(View.VISIBLE);
 
-        btn_cart_clear = view.findViewById(R.id.btn_cart_clear);
-        btn_cart_checkout = view.findViewById(R.id.btn_cart_checkout);
-        tv_cart_subtotal = view.findViewById(R.id.tv_cart_subtotal);
-        tv_cart_grandtotal = view.findViewById(R.id.tv_cart_grandtotal);
+        tv_CartTotalInPkr = view.findViewById(R.id.tv_cart_total_in_pkr);
+        tv_CartTotalItems = view.findViewById(R.id.tv_cart_total_items);
+        //Update the Text in UpdateListView
 
         /** Get Global Controller Class object (See application tag in AndroidManifest.xml )*/
         controller = (Controller) getActivity().getApplicationContext();
 
-        tv_cart_subtotal.setText(String.valueOf(controller.getTotalPrice()));
-        tv_cart_grandtotal.setText(String.valueOf(controller.getTotalPrice()));
-
-        btn_cart_clear.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                controller.clearCart();
-                myInterface.OnCartUpdate(controller.getCartSize());
-                layout_cart.setVisibility(View.GONE);
-                tv_cart.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn_cart_checkout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                //TODO:: Add asynctask to call server and placde the order
-            }
-        });
-
         updateListView();
+
+        btnCartClear = view.findViewById(R.id.btnClearMainCart);
+        btnCartPlaceOrder = view.findViewById(R.id.btnCartPlaceOrder);
+
+        btnCartClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.clearCart(); //Clear the Cart
+                myInterface.OnCartUpdate(controller.getCartSize()); //Update the Cart View
+                updateListView(); //Update The ListView
+            }
+        });
+
+        btnCartPlaceOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return  view;
     }
@@ -115,6 +101,8 @@ public class CartActivity extends Fragment
             }
         }
 
+        tv_CartTotalInPkr.setText(String.valueOf(controller.getTotalPrice()));
+        tv_CartTotalItems.setText(String.valueOf(controller.getUniqueItems()));
         adapter.notifyDataSetChanged();
     }
 
@@ -135,9 +123,15 @@ public class CartActivity extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        if ( getActivity() instanceof ICartUpdated)
+        if ( getActivity() instanceof ICartOperations)
         {
-            myInterface = (ICartUpdated) getActivity();
+            myInterface = (ICartOperations) getActivity();
         }
+    }
+
+    @Override
+    public void onResume() {
+        updateListView();
+        super.onResume();
     }
 }

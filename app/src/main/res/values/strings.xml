@@ -32,5 +32,9 @@
     <string name="btnAddToCart">Add to Cart</string>
     <string name="btnPlusBuy">+</string>
     <string name="btnMinusBuy">-</string>
+    <string name="cart_qty_total_items">TOTAL KG</string>
+    <string name="cart_grand_total_price">TOTAL PKR</string>
+    <string name="btn_cart_clear">Clear Cart</string>
+    <string name="btn_cart_place_order">Place Order</string>
 
 </resources>

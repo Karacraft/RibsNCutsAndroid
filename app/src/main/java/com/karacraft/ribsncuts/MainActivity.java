@@ -32,6 +32,8 @@ import com.karacraft.ribsncuts.helper.CustomToast;
 import com.karacraft.ribsncuts.helper.RequestMode;
 import com.karacraft.ribsncuts.helper.RequestType;
 import com.karacraft.ribsncuts.helper.SharePref;
+import com.karacraft.ribsncuts.model.Item;
+import com.karacraft.ribsncuts.splash.SplashActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +42,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,ICartUpdated,AsyncHttpConnectionTask.AsyncHCTCallback
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        AsyncHttpConnectionTask.AsyncHCTCallback ,
+        ICartOperations
 {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
 
     TextView all, beef, mutton , tvCartBadge;
+    Menu mainMenu;
 
     int countNumber;
 
@@ -193,7 +199,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        this.mainMenu = menu;
 
+        if(isUserLoggedIn())
+        {
+            MenuItem menuItem = menu.findItem(R.id.nav_login);
+            menuItem.setIcon(null);
+            menuItem.setTitle("Logout");
+        }
 
         final MenuItem menuItem = menu.findItem(R.id.nav_cart);
         final View badge = menuItem.getActionView();
@@ -213,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
+
 
     public void setupBadge()
     {
@@ -246,6 +260,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.nav_login) {
+            if (item.getTitle() == "Logout")
+            {
+                //TODO::logout user and reset the menu
+                return true;
+            }
             showLoginAlertDialog();
             return true;
         }
@@ -461,6 +480,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupBadge();
     }
 
+    @Override
+    public void OnItemAddedToCart(Item item) {
+        controller.addItem(item);
+        OnCartUpdate(controller.getCartSize());
+    }
+
     /**
      * AsyncTask Implemented Interface callBack
      * @param success
@@ -518,6 +543,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             JSONObject jsonObject = new JSONObject(result);
             token = jsonObject.getString(Constants.APP_TOKEN);
 
+            //Save Shared Preferences
+            SharePref g = SharePref.getInstance(MainActivity.this);
+            g.putBoolean(Constants.USER_LOGGED_IN,true);
+            g.putString(Constants.APP_TOKEN,token);
+
             if(BuildConfig.DEBUG)
                 Log.d(Constants.TAG, "saveTokenFromAttempt:  Token: " + token);
 
@@ -574,6 +604,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             progressDialog.dismiss();
         }
+    }
+
+    public boolean isUserLoggedIn()
+    {
+        //Save Shared Preferences
+        SharePref g = SharePref.getInstance(MainActivity.this);
+        boolean isUserLoggedIn = g.getBoolean(Constants.USER_LOGGED_IN);
+        if (isUserLoggedIn)
+        {
+            return true;
+        }
+        return false;
     }
 
 }

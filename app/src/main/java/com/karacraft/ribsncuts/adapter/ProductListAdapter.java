@@ -4,16 +4,22 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.karacraft.ribsncuts.ICartOperations;
 import com.karacraft.ribsncuts.R;
 import com.karacraft.ribsncuts.helper.Constants;
+import com.karacraft.ribsncuts.model.Item;
 import com.karacraft.ribsncuts.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * This ProductLIstAdapter uses ICartOperations Interface
+ */
 public class ProductListAdapter extends BaseAdapter {
 
     private Context context;
@@ -43,7 +49,7 @@ public class ProductListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
 
         View v;
 
@@ -52,13 +58,14 @@ public class ProductListAdapter extends BaseAdapter {
         TextView tv_product_title = v.findViewById(R.id.tv_product_title);
         TextView tv_product_best_for = v.findViewById(R.id.tv_product_best_for);
         TextView tv_product_price = v.findViewById(R.id.tv_product_price);
+        Button btnAddToCartProductList = v.findViewById(R.id.btnAddToCartProductList);
+        btnAddToCartProductList.setTag(position);
+        btnAddToCartProductList.setOnClickListener(myButtonOnClickListener);
 
         /** Set Image & Text */
-
         tv_product_title.setText(products.get(position).getTitle());
         tv_product_best_for.setText(products.get(position).getBestFor());
         tv_product_price.setText(String.valueOf(products.get(position).getPrice()) + " / Kg");
-
 
         ImageView img_product_image = v.findViewById(R.id.img_product_image);
 
@@ -70,10 +77,32 @@ public class ProductListAdapter extends BaseAdapter {
 //                .resize(960,617)
 //                .resize(1080,694)
                 .into(img_product_image);
-
-
+        
         v.setTag(products.get(position).getId());
+
+
 //        return null;
         return v;
     }
+
+    private View.OnClickListener myButtonOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          int position = (int) view.getTag();
+//            Log.d(TAG, "onClick: position" + position);
+            if(context instanceof ICartOperations)
+            {
+                Item item = new Item();
+                item.setId(products.get(position).getId());
+                item.setTitle(products.get(position).getTitle());
+                item.setImage(products.get(position).getImage());
+                item.setPrice(products.get(position).getPrice());
+                item.setQuantity(1);
+                //Now Call the Method in Listener
+                ((ICartOperations)context).OnItemAddedToCart(item);
+            }
+
+        }
+    };
+
 }

@@ -47,6 +47,12 @@
         <item name="android:textSize">@dimen/medium_font_size</item>
     </style>
 
+    <style name="AppTheme.ButtonDanger" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/medium_font_size</item>
+    </style>
+
     <style name="DialogTheme">
         <item name="android:windowEnterAnimation">@anim/slidedown</item>
         <item name="android:windowExitAnimation">@anim/slideup</item>

@@ -54,8 +54,8 @@ public class CartItemListAdapter extends BaseAdapter {
         /** Set Image & Text */
 
         tv_item_title.setText(items.get(position).getTitle());
-        tv_item_qty.setText (String.valueOf(items.get(position).getQuantity()));
-        tv_item_price.setText(String.valueOf(items.get(position).getPrice()) + " /Kg");
+        tv_item_qty.setText ("Qty " + items.get(position).getQuantity() + " Kg");
+        tv_item_price.setText("Price/kg PKR " + items.get(position).getPrice());
 
         ImageView iv_item_image = v.findViewById(R.id.iv_item_image);
 

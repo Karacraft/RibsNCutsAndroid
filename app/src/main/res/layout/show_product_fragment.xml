@@ -6,7 +6,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_height="wrap_content"
         android:scrollIndicators="top|bottom">
 
         <RelativeLayout
@@ -14,6 +15,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_alignParentTop="true"
                 android:id="@+id/tv_product_title_full"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,17 +78,17 @@
                 android:text="Rs 600"
                 android:textSize="@dimen/medium_font_size" />
 
-            <Button
-                android:id="@+id/btnAddToCart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/tv_price_full"
-                android:text="@string/btnAddToCart"
-                android:theme="@style/AppTheme.ButtonSuccess" />
 
         </RelativeLayout>
+
     </ScrollView>
 
+    <Button
+        android:layout_gravity="bottom"
+        android:id="@+id/btnAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAddToCart"
+        android:theme="@style/AppTheme.ButtonSuccess" />
 
 </FrameLayout>

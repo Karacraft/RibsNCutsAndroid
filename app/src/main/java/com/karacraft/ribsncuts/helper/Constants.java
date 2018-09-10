@@ -2,7 +2,7 @@ package com.karacraft.ribsncuts.helper;
 
 public class Constants
 {
-    public static final String IP_LOCAL = "http://192.168.0.100/";
+    public static final String IP_LOCAL = "http://192.168.0.102/";
 //    public static final String PRODUCT_URL = "http://ribsncuts.com/api/products";
     public static final String PRODUCT_URL = IP_LOCAL +  "ribsncuts/public/api/products";
     public static final String LATEST_URL = IP_LOCAL +  "api/latest";
@@ -22,6 +22,7 @@ public class Constants
     public static final String USER_EMAIL = "user_email";
     public static final String USER_PASSWORD = "user_password";
     public static final String USER_NAME ="user_name";
+    public static final String USER_LOGGED_IN = "userloggedin";
 
     public static final String TAG = "kcraftpk@gmail.com";
 

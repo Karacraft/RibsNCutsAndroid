@@ -29,7 +29,7 @@ import static com.karacraft.ribsncuts.helper.Constants.TAG;
 public class ShowProductActivity extends Fragment
 {
 
-    ICartUpdated myInterface;
+    ICartOperations myInterface;
 
     Button btnAddToCart;
     ImageView ivProduct;
@@ -99,7 +99,8 @@ public class ShowProductActivity extends Fragment
             @Override
             public void onClick(View view)
             {
-                controller.addItem(item);
+//                controller.addItem(item);
+                myInterface.OnItemAddedToCart(item);
                 myInterface.OnCartUpdate(controller.getCartSize());
                 CustomToast.showToastMessage(item.getTitle() +" added to cart.", getContext(), Toast.LENGTH_SHORT);
                 Log.d(TAG, "Cart Items[Unique]: " + controller.getUniqueItems() + " Items[Total]: " + controller.getTotalItems() + " Price: " + controller.getTotalPrice());
@@ -126,9 +127,9 @@ public class ShowProductActivity extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        if ( getActivity() instanceof ICartUpdated)
+        if ( getActivity() instanceof ICartOperations)
         {
-            myInterface = (ICartUpdated) getActivity();
+            myInterface = (ICartOperations) getActivity();
         }
     }
 }
