@@ -4,6 +4,9 @@ package com.karacraft.ribsncuts.helper;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import static com.karacraft.ribsncuts.helper.Constants.TAG;
 
 public class SharePref
 {
@@ -44,6 +47,13 @@ public class SharePref
     public boolean getBoolean(String key)
     {
         return  sharedPreferences.getBoolean(key,false);
+    }
+
+    public void removeString(String key)
+    {
+        editor.remove(key);
+        editor.commit();
+        Log.d(TAG, "removeString: " + key);
     }
 
 }

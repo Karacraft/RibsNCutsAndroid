@@ -25,6 +25,7 @@ public class CustomToast
 
         Toast toast = new Toast(context);
         toast.setDuration(duration);
+//        toast.setGravity(Gravity.CENTER|Gravity.FILL_HORIZONTAL,0,0);
         toast.setGravity(Gravity.BOTTOM|Gravity.FILL_HORIZONTAL,0,0);
 //        toast.setGravity(Gravity.BOTTOM,0,0);
         toast.setView(toastView);

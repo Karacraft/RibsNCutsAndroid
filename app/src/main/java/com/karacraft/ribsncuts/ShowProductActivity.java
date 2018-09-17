@@ -89,10 +89,10 @@ public class ShowProductActivity extends Fragment
         //Create Item and Add to Cart
         final Item item  = new Item();
         item.setId(product.getId());
-        item.setTitle(product.getTitle());
+        item.setName(product.getTitle());
         item.setImage(product.getImage());
         item.setPrice(product.getPrice());
-        item.setQuantity(1);
+        item.setQty(1);
 
         btnAddToCart.setOnClickListener(new View.OnClickListener()
         {
@@ -102,8 +102,11 @@ public class ShowProductActivity extends Fragment
 //                controller.addItem(item);
                 myInterface.OnItemAddedToCart(item);
                 myInterface.OnCartUpdate(controller.getCartSize());
-                CustomToast.showToastMessage(item.getTitle() +" added to cart.", getContext(), Toast.LENGTH_SHORT);
-                Log.d(TAG, "Cart Items[Unique]: " + controller.getUniqueItems() + " Items[Total]: " + controller.getTotalItems() + " Price: " + controller.getTotalPrice());
+                CustomToast.showToastMessage(item.getName() +" added to cart.", getContext(), Toast.LENGTH_SHORT);
+
+                if(BuildConfig.DEBUG)
+                    Log.d(TAG, "Cart Items[Unique]: " + controller.getUniqueItems() + " Items[Total]: " + controller.getTotalItems() + " Price: " + controller.getTotalPrice());
+
             }
         });
 

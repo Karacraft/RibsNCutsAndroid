@@ -1,6 +1,7 @@
 package com.karacraft.ribsncuts.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.karacraft.ribsncuts.BuildConfig;
 import com.karacraft.ribsncuts.ICartOperations;
 import com.karacraft.ribsncuts.R;
 import com.karacraft.ribsncuts.helper.Constants;
@@ -16,6 +18,8 @@ import com.karacraft.ribsncuts.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static com.karacraft.ribsncuts.helper.Constants.TAG;
 
 /**
  * This ProductLIstAdapter uses ICartOperations Interface
@@ -88,19 +92,22 @@ public class ProductListAdapter extends BaseAdapter {
     private View.OnClickListener myButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          int position = (int) view.getTag();
-//            Log.d(TAG, "onClick: position" + position);
-            if(context instanceof ICartOperations)
-            {
-                Item item = new Item();
-                item.setId(products.get(position).getId());
-                item.setTitle(products.get(position).getTitle());
-                item.setImage(products.get(position).getImage());
-                item.setPrice(products.get(position).getPrice());
-                item.setQuantity(1);
-                //Now Call the Method in Listener
-                ((ICartOperations)context).OnItemAddedToCart(item);
-            }
+        int position = (int) view.getTag();
+
+        if(BuildConfig.DEBUG)
+            Log.d(TAG, "myButtonOnClickListener() invoked");
+
+        if(context instanceof ICartOperations)
+        {
+            Item item = new Item();
+            item.setId(products.get(position).getId());
+            item.setName(products.get(position).getTitle());
+            item.setImage(products.get(position).getImage());
+            item.setPrice(products.get(position).getPrice());
+            item.setQty(1);
+            //Now Call the Method in Listener
+            ((ICartOperations)context).OnItemAddedToCart(item);
+        }
 
         }
     };

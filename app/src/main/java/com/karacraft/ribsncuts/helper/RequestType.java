@@ -7,4 +7,5 @@ public enum RequestType {
     POST_REGISTER,  //Register user to get Token , pass Full name, Email, Password & Confirm Password
     POST_DETAILS,   //Send email & password to get it
     POST_ORDER,     //Send token , email & password to place order
+    POST_UPDATE_PROFILE, //Sent Token, with profile Information
 }

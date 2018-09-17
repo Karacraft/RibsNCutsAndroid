@@ -65,6 +65,16 @@ public class Controller extends Application
         cart.clearCart();
     }
 
+    public void increaseItem(Item item)
+    {
+        cart.increaseItem(item);
+    }
+
+    public void decreaseItem(Item item)
+    {
+        cart.decreaseItem(item);
+    }
+
     public ArrayList<Item> getCartContents()
     {
         return cart.CartContents();

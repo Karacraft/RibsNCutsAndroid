@@ -2,7 +2,6 @@ package com.karacraft.ribsncuts;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -10,14 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.karacraft.ribsncuts.DB.ProductsDB;
 import com.karacraft.ribsncuts.adapter.ProductListAdapter;
 import com.karacraft.ribsncuts.cart.Controller;
 import com.karacraft.ribsncuts.helper.Constants;
-import com.karacraft.ribsncuts.model.Item;
 import com.karacraft.ribsncuts.model.Product;
 
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ public class AllActivity extends Fragment
         // Inflate the View
         View v =  inflater.inflate(R.layout.fragment_all, container, false);
 
-        /** Get Global Controller Class object (See applicaiton tag in anrdroidmanifest.xml )*/
+        /** Get Global Controller Class object (See application tag in anrdroidmanifest.xml )*/
         controller = (Controller) getActivity().getApplicationContext();
 
         empty = v.findViewById(R.id.empty_all);
@@ -67,10 +64,9 @@ public class AllActivity extends Fragment
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
             {
+
                 if(BuildConfig.DEBUG)
-                {
                     Log.d(TAG, "onItemClick: " + values.get(i).getTitle());
-                }
 
                 Bundle bundle = new Bundle();
 
@@ -115,12 +111,12 @@ public class AllActivity extends Fragment
         }
         else {
             if(BuildConfig.DEBUG)
-            {
                 Log.d(TAG, "updateListView: ListView is Null!");
-            }
+
         }
 
         adapter.notifyDataSetChanged();
+
     }
 
 }

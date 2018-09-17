@@ -2,7 +2,7 @@ package com.karacraft.ribsncuts.helper;
 
 public class Constants
 {
-    public static final String IP_LOCAL = "http://192.168.0.102/";
+    public static final String IP_LOCAL = "http://192.168.0.103/";
 //    public static final String PRODUCT_URL = "http://ribsncuts.com/api/products";
     public static final String PRODUCT_URL = IP_LOCAL +  "ribsncuts/public/api/products";
     public static final String LATEST_URL = IP_LOCAL +  "api/latest";
@@ -13,16 +13,26 @@ public class Constants
 //    public static final String REGISTER_URL = "http://ribsncuts.com/api/register";
     public static final String REGISTER_URL = IP_LOCAL +  "ribsncuts/public/api/register";
     public static final String IMAGE_URL = "https://ribsncuts.com/images/products/";
+    public static final String PLACE_ORDER_URL = IP_LOCAL +  "ribsncuts/public/api/order";
+//    public static final String PLACE_ORDER_URL = IP_LOCAL +  "http://ribsncuts.com/api/order";
+    public static final String UPDATE_PROFILE_URL = IP_LOCAL +  "ribsncuts/public/api/profile/update";
+//    public static final String UPDATE_PROFILE_URL = IP_LOCAL +  "http://ribsncuts.com/api/profile/update";
 
     /** Application Preferences*/
     public static final String APP_PREF_NAME = "com.karacraft.ribsncuts.prefs";
     public static final String FIRST_ATTEMPT = "first_attempt";
     public static final String LAST_UPDATE = "last_update";
     public static final String APP_TOKEN = "token";
-    public static final String USER_EMAIL = "user_email";
-    public static final String USER_PASSWORD = "user_password";
-    public static final String USER_NAME ="user_name";
+    public static final String USER_EMAIL = "email";
+    public static final String USER_PASSWORD = "password";
+    public static final String USER_NAME ="name";
     public static final String USER_LOGGED_IN = "userloggedin";
+    public static final String PROFILE_ID = "id";
+    public static final String PROFILE_CONTACT = "contact";
+    public static final String PROFILE_ADDRESS = "address";
+    public static final String PROFILE_CITY = "city";
+    public static final String PROFILE_CELLNUMBER = "cellnumber";
+    public static final String PROFILE_LANDLINE = "landline";
 
     public static final String TAG = "kcraftpk@gmail.com";
 

@@ -61,9 +61,8 @@ public class MuttonActivity extends Fragment
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
             {
                 if(BuildConfig.DEBUG)
-                {
                     Log.d(TAG, "onItemClick: " + values.get(i).getTitle());
-                }
+
 
                 Bundle bundle = new Bundle();
 
@@ -114,9 +113,8 @@ public class MuttonActivity extends Fragment
         else
         {
             if(BuildConfig.DEBUG)
-            {
                 Log.d(Constants.TAG, "updateListView: ListView is Null!");
-            }
+
         }
 
         adapter.notifyDataSetChanged();

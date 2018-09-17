@@ -25,27 +25,17 @@ public class AsyncHttpConnectionTask extends AsyncTask<String /** Parameters In 
     RequestType requestType;            //Request REST API
     RequestMode requestMode;            //Request Mode : Post or Get
     AsyncHCTCallback hctCallback;       //Callback function in calling activity
+    String token;                       //Laravel Passport API Token
 
     public static final String REQUEST_METHOD_GET = "GET";
     public static final String REQUEST_METHOD_POST = "POST";
     public static final int READ_TIMEOUT = 15000;
     public static final int CONNECTION_TIMEOUT = 15000;
 
-
-    /** This is how to call the Class
-     Map<String, String> postData = new HashMap<>();
-     postData.put("param1", param1);
-     postData.put("anotherParam", anotherParam);
-     PostTask task = new AsyncHttpConnectionTask(postData,requestType,requestMode,calling activity); or
-     GetTask task = new AsyncHttpConnectionTask(requestType,requestMode,calling activity)
-     task.execute(baseUrl + "/some/path/goes/here");
-     */
-
     /** The Interface */
     public interface AsyncHCTCallback
     {
         void OnAsyncTaskCompleted(Boolean success, RequestMode requestMode,RequestType requestType,String result);
-
     }
 
     /**
@@ -79,6 +69,18 @@ public class AsyncHttpConnectionTask extends AsyncTask<String /** Parameters In 
         }
     }
 
+    public AsyncHttpConnectionTask(RequestMode requestMode,RequestType requestType, AsyncHCTCallback hctCallback,Map<String,String> postData, String token)
+    {
+        if (postData != null)
+        {
+            this.postData = new JSONObject(postData);
+            this.requestType = requestType;
+            this.requestMode = requestMode;
+            this.hctCallback = hctCallback;
+            this.token = token;
+        }
+    }
+
     @Override
     protected void onPreExecute()
     {
@@ -92,7 +94,6 @@ public class AsyncHttpConnectionTask extends AsyncTask<String /** Parameters In 
         String result = "";  //Data From Server
         Boolean operationSuccessful = false;
 
-        Log.d(TAG, "doInBackground: Starting...");
 
         try
         {
@@ -127,6 +128,8 @@ public class AsyncHttpConnectionTask extends AsyncTask<String /** Parameters In 
                         urlConnection.setRequestMethod(REQUEST_METHOD_POST);
                         urlConnection.setRequestProperty("Content-type", "application/json");
                         urlConnection.connect();
+
+
                         /** Send the Post Body*/
                         if (this.postData != null)
                         {
@@ -137,6 +140,7 @@ public class AsyncHttpConnectionTask extends AsyncTask<String /** Parameters In 
                     }
                     break;
                 case POST_DETAILS:
+                case POST_UPDATE_PROFILE:
                 case POST_ORDER:
                     {
                         urlConnection.setDoInput(true);
@@ -145,7 +149,10 @@ public class AsyncHttpConnectionTask extends AsyncTask<String /** Parameters In 
                         urlConnection.setReadTimeout(30000);
                         urlConnection.setRequestMethod(REQUEST_METHOD_POST);
                         urlConnection.setRequestProperty("Content-type", "application/json");
+                        urlConnection.setRequestProperty("Authorization","Bearer " + token);
                         urlConnection.connect();
+
+
                         /** Send the Post Body*/
                         if (this.postData != null)
                         {
@@ -192,7 +199,6 @@ public class AsyncHttpConnectionTask extends AsyncTask<String /** Parameters In 
                 operationSuccessful = false;
             }
 
-            Log.d(TAG, "doInBackground: Status Code done....");
 
             hctCallback.OnAsyncTaskCompleted(operationSuccessful,requestMode,requestType,result);
 

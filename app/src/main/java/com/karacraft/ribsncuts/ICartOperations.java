@@ -24,5 +24,8 @@ public interface ICartOperations {
 
     void OnCartUpdate(int cartSize);
     void OnItemAddedToCart(Item item);
+    void OnIncreaseItemInCart(Item item);
+    void OnDecreaseItemInCart(Item item);
+    void OnOrderPostSuccessful();
 
 }

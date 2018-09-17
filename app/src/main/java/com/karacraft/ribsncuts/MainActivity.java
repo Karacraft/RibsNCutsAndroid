@@ -1,14 +1,19 @@
 package com.karacraft.ribsncuts;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +38,6 @@ import com.karacraft.ribsncuts.helper.RequestMode;
 import com.karacraft.ribsncuts.helper.RequestType;
 import com.karacraft.ribsncuts.helper.SharePref;
 import com.karacraft.ribsncuts.model.Item;
-import com.karacraft.ribsncuts.splash.SplashActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,15 +53,15 @@ public class MainActivity extends AppCompatActivity implements
 {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
-    ProgressDialog progressDialog;
-    Controller controller;
+    ProgressDialog progressDialog;      //Progress Dialog to be shown during long operations
+    Controller controller;              //Cart Data Operations
 
-    Toolbar toolbar;
-    DrawerLayout drawer;
-    ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
+    Toolbar toolbar;                    //Shows our Navigation Drawer Icon
+    DrawerLayout drawer;                //Navigation Drawer
+    ActionBarDrawerToggle toggle;       //Action Bar with Menu & Icons
+    NavigationView navigationView;      //Nav View
 
-    TextView all, beef, mutton , tvCartBadge;
+    TextView all, beef, mutton , tvCartBadge ;
     Menu mainMenu;
 
     int countNumber;
@@ -74,9 +78,15 @@ public class MainActivity extends AppCompatActivity implements
         /** Setup Toolbar */
         toolbar = findViewById(R.id.main_toolbar); //In toolbar_main.xml
         setSupportActionBar(toolbar);
+        //This allows us to show custom action bar
+//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getSupportActionBar().setCustomView(R.layout.custom_actionbar);
+//        ((TextView)getSupportActionBar().getCustomView().findViewById(R.id.tvActionBarTitle)).setText("new title");
+        //Other Details
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_rnc_logo_24_w);
+//        getSupportActionBar().setLogo(R.drawable.ic_rnc_logo_24_w);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         /** Setup Drawer */
         drawer = findViewById(R.id.drawer_layout);
@@ -89,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements
         /** Create Navigation View*/
         navigationView = findViewById(R.id.nav_drawer_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 //        Setup NavDrawer Texts
 //        all = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_all));
 //        beef = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_beef));
@@ -104,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements
 //                .addToBackStack(null)
                 .replace(R.id.main_fragment, allActivity)
                 .commit();
+
     }
 
     /**
@@ -132,39 +144,35 @@ public class MainActivity extends AppCompatActivity implements
     /** Load the selected Fragment in View */
     private void loadSelectedFragment(int fragmentId)
     {
-
         switch (fragmentId){
             case R.id.nav_all:
                 AllActivity allActivity = new AllActivity();
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
-                        .addToBackStack(null)
-                        .replace(R.id.main_fragment, allActivity)
-                        .commit();
+                replaceFragment(allActivity);
                 break;
             case R.id.nav_beef:
                 BeefActivity beefActivity = new BeefActivity();
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
-                        .addToBackStack(null)
-                        .replace(R.id.main_fragment,beefActivity)
-                        .commit();
+                replaceFragment(beefActivity);
+//                fragmentManager.beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
+//                        .addToBackStack(null)
+//                        .replace(R.id.main_fragment,beefActivity)
+//                        .commit();
                 break;
             case R.id.nav_mutton:
                 MuttonActivity muttonActivity = new MuttonActivity();
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
-                        .addToBackStack(null)
-                        .replace(R.id.main_fragment,muttonActivity)
-                        .commit();
+                replaceFragment(muttonActivity);
                 break;
+            case R.id.nav_profile:
+                ProfileActivity profileActivity = new ProfileActivity();
+                replaceFragment(profileActivity);
+                break;
+//            case R.id.nav_ordres:
+//                OrdersActivity ordersActivity = new OrdersActivity();
+//                replaceFragment(ordersActivity);
+//                break;
             case R.id.nav_address:
                 AddressActivity addressActivity = new AddressActivity();
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
-                        .addToBackStack(null)
-                        .replace(R.id.main_fragment, addressActivity)
-                        .commit();
+                replaceFragment(addressActivity);
                 break;
             case R.id.nav_visit_website:
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://ribsncuts.com"));
@@ -179,6 +187,21 @@ public class MainActivity extends AppCompatActivity implements
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
+    }
+
+    private void replaceFragment(Fragment fragment)
+    {
+        String backStateName = fragment.getClass().getName();
+
+        boolean fragmentPopped = fragmentManager.popBackStackImmediate (backStateName, 0);
+
+        if (!fragmentPopped){ //fragment not in back stack, create it.
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.main_fragment, fragment);
+            ft.setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right);
+            ft.addToBackStack(backStateName);
+            ft.commit();
+        }
     }
 
     @Override
@@ -201,11 +224,18 @@ public class MainActivity extends AppCompatActivity implements
         getMenuInflater().inflate(R.menu.main_menu, menu);
         this.mainMenu = menu;
 
+        //setup User Menu
         if(isUserLoggedIn())
         {
             MenuItem menuItem = menu.findItem(R.id.nav_login);
-            menuItem.setIcon(null);
+            menuItem.setIcon(R.drawable.ic_signout_24);
             menuItem.setTitle("Logout");
+        }
+        else
+        {
+            MenuItem menuItem = menu.findItem(R.id.nav_login);
+            menuItem.setIcon(R.drawable.ic_signin_24);
+            menuItem.setTitle("Login");
         }
 
         final MenuItem menuItem = menu.findItem(R.id.nav_cart);
@@ -226,7 +256,6 @@ public class MainActivity extends AppCompatActivity implements
 
         return true;
     }
-
 
     public void setupBadge()
     {
@@ -257,12 +286,12 @@ public class MainActivity extends AppCompatActivity implements
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.nav_login) {
-            if (item.getTitle() == "Logout")
+            if(isUserLoggedIn())
             {
-                //TODO::logout user and reset the menu
+                logOutUser();
+                CustomToast.showToastMessage("User logged out..",MainActivity.this,Toast.LENGTH_SHORT);
                 return true;
             }
             showLoginAlertDialog();
@@ -277,19 +306,13 @@ public class MainActivity extends AppCompatActivity implements
             }
             else
             {
-
                 CartActivity cartActivity = (CartActivity) fragmentManager.findFragmentByTag("CartFragment");
                 //if we are on cartActivity , then gracefully don't reply to click
                 if (cartActivity == null)
                 {
                     cartActivity = new CartActivity();
-                    fragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.slide_from_right,R.anim.slide_to_left,R.anim.slide_from_left,R.anim.slide_to_right)
-                            .addToBackStack(null)
-                            .replace(R.id.main_fragment, cartActivity,"CartFragment")
-                            .commit();
+                    replaceFragment(cartActivity);
                 }
-
             }
             return true;
         }
@@ -321,6 +344,7 @@ public class MainActivity extends AppCompatActivity implements
                 if (TextUtils.isEmpty(etPassword.getText()))
                 {
                     etPassword.setError("Field is empty");
+                    etPassword.requestFocus();
                     return;
                 }
                 String email = etEmail.getText().toString().trim();
@@ -328,6 +352,7 @@ public class MainActivity extends AppCompatActivity implements
                 if (TextUtils.isEmpty(email) || !isEmailValid(email))
                 {
                     etEmail.setError("Email address required");
+                    etEmail.requestFocus();
                     return;
                 }
 
@@ -379,7 +404,8 @@ public class MainActivity extends AppCompatActivity implements
             {
                 if (TextUtils.isEmpty(etUsername.getText().toString()))
                 {
-                    etUsername.setError("Required Filed");
+                    etUsername.setError("Username is Required");
+                    etUsername.requestFocus();
                     return;
                 }
 
@@ -387,25 +413,29 @@ public class MainActivity extends AppCompatActivity implements
 
                 if (TextUtils.isEmpty(email) || !isEmailValid(email))
                 {
-                    etEmail.setError("Email address required");
+                    etEmail.setError("Email Address is Required");
+                    etEmail.requestFocus();
                     return;
                 }
 
                 if (TextUtils.isEmpty(etPassword1.getText()))
                 {
-                    etPassword1.setError("Field is required");
+                    etPassword1.setError("Password is Required");
+                    etPassword1.requestFocus();
                     return;
                 }
 
                 if (TextUtils.isEmpty(etPassword2.getText()))
                 {
-                    etPassword2.setError("Field is required");
+                    etPassword2.setError("Password is Required");
+                    etPassword2.requestFocus();
                     return;
                 }
 
                 if ( !etPassword1.getText().toString().equals(etPassword2.getText().toString()))
                 {
                     etPassword2.setError("Field doesn't match");
+                    etPassword2.requestFocus();
                     return;
                 }
 
@@ -481,8 +511,30 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void OnItemAddedToCart(Item item) {
+    public void OnItemAddedToCart(Item item)
+    {
+        CustomToast.showToastMessage(item.getName() + " added to Cart",MainActivity.this, Toast.LENGTH_SHORT);
         controller.addItem(item);
+        OnCartUpdate(controller.getCartSize());
+    }
+
+    @Override
+    public void OnDecreaseItemInCart(Item item)
+    {
+        controller.decreaseItem(item);
+        OnCartUpdate(controller.getCartSize());
+    }
+
+    @Override
+    public void OnOrderPostSuccessful() {
+        countNumber = 0;
+        setupBadge();
+    }
+
+    @Override
+    public void OnIncreaseItemInCart(Item item)
+    {
+        controller.increaseItem(item);
         OnCartUpdate(controller.getCartSize());
     }
 
@@ -534,40 +586,57 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /** This is invoked after AsyncTask is finished */
-    public void saveTokenFromAttempt(String result)
+    void saveTokenFromAttempt(String result)
     {
+
+        /** Display Message of Failure */
+        MainActivity.this.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+            //TODO::Show Dialog
+            CustomToast.showToastMessage("Please update your profile before posting an order",MainActivity.this,Toast.LENGTH_LONG);
+            }
+        });
+
+
+        if(BuildConfig.DEBUG)
+            Log.d(Constants.TAG, "saveTokenFromAttempt: Result " + result);
 
         String token ="";
         try
         {
-            JSONObject jsonObject = new JSONObject(result);
-            token = jsonObject.getString(Constants.APP_TOKEN);
+            JSONObject joResult = new JSONObject(result);
+            JSONObject joProfile = joResult.getJSONObject("profile");
+            token = joResult.getString(Constants.APP_TOKEN);
+            String name = joResult.getString(Constants.USER_NAME);
 
             //Save Shared Preferences
             SharePref g = SharePref.getInstance(MainActivity.this);
             g.putBoolean(Constants.USER_LOGGED_IN,true);
             g.putString(Constants.APP_TOKEN,token);
+            g.putString(Constants.USER_NAME,name);
+            g.putString(Constants.PROFILE_ID,joProfile.getString(Constants.PROFILE_ID));
+            g.putString(Constants.PROFILE_CONTACT,joProfile.getString(Constants.PROFILE_CONTACT));
+            g.putString(Constants.PROFILE_ADDRESS,joProfile.getString(Constants.PROFILE_ADDRESS));
+            g.putString(Constants.PROFILE_CITY,joProfile.getString(Constants.PROFILE_CITY));
+            g.putString(Constants.PROFILE_CELLNUMBER,joProfile.getString(Constants.PROFILE_CELLNUMBER));
+            g.putString(Constants.PROFILE_LANDLINE,joProfile.getString(Constants.PROFILE_LANDLINE));
+            //Invalidate Menus to Show the Proper icon
+            invalidateOptionsMenu(); //I Guess this will work
+            //Disable Progress bar
+            disableProgressDialog();
 
-            if(BuildConfig.DEBUG)
-                Log.d(Constants.TAG, "saveTokenFromAttempt:  Token: " + token);
-
-        } catch (JSONException e)
+        }
+        catch (JSONException e)
         {
             disableProgressDialog();
             e.printStackTrace();
         }
-
-        //TODO::ensure Login Form is no more showable
-
-        /** Setting Shared Preferences */
-        SharePref g = SharePref.getInstance(MainActivity.this);
-        g.putString(Constants.APP_TOKEN,token);
-
-        disableProgressDialog();
-
     }
 
-    public void tokenAttemptFailed(final String result)
+    void tokenAttemptFailed(final String result)
     {
 
         disableProgressDialog();
@@ -589,7 +658,7 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    public void enableProgressDialog(String message)
+    void enableProgressDialog(String message)
     {
         /** Show ProgressDialog */
         progressDialog = new ProgressDialog(MainActivity.this);
@@ -597,7 +666,7 @@ public class MainActivity extends AppCompatActivity implements
         progressDialog.show();
     }
 
-    public void disableProgressDialog()
+    void disableProgressDialog()
     {
         /** Dismiss the Progress Dialog **/
         if (progressDialog != null && progressDialog.isShowing())
@@ -606,7 +675,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    public boolean isUserLoggedIn()
+    boolean isUserLoggedIn()
     {
         //Save Shared Preferences
         SharePref g = SharePref.getInstance(MainActivity.this);
@@ -616,6 +685,25 @@ public class MainActivity extends AppCompatActivity implements
             return true;
         }
         return false;
+    }
+
+    void logOutUser()
+    {
+        SharePref s = SharePref.getInstance(MainActivity.this);
+
+        s.putBoolean(Constants.USER_LOGGED_IN,false);
+        s.removeString(Constants.APP_TOKEN);
+        s.removeString(Constants.USER_EMAIL);
+        s.removeString(Constants.USER_PASSWORD);
+        s.removeString(Constants.USER_NAME);
+        s.removeString(Constants.PROFILE_ID);
+        s.removeString(Constants.PROFILE_CONTACT);
+        s.removeString(Constants.PROFILE_ADDRESS);
+        s.removeString(Constants.PROFILE_CELLNUMBER);
+        s.removeString(Constants.PROFILE_LANDLINE);
+        s.removeString(Constants.PROFILE_CITY);
+        //Invalidate Menu
+        invalidateOptionsMenu();
     }
 
 }

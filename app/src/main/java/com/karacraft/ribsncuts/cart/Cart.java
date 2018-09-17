@@ -2,6 +2,7 @@ package com.karacraft.ribsncuts.cart;
 
 import android.util.Log;
 
+import com.karacraft.ribsncuts.BuildConfig;
 import com.karacraft.ribsncuts.model.Item;
 
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import static com.karacraft.ribsncuts.helper.Constants.TAG;
 
 public class Cart
 {
-
     //    private ArrayList<Product> products;
     private ArrayList<Item> items;
 
@@ -35,67 +35,63 @@ public class Cart
         if(inRecord(item))
         {
             increaseItem(item);
-            Log.d(TAG, "Increasing already added item...");
         }
         else
         {
             items.add(item);
-            Log.d(TAG, "New Item added...");
+
+
+            if(BuildConfig.DEBUG)
+                Log.d(TAG, "Item Added.");
         }
-    }
 
-    public void removeItem(Item item)
-    {
-
-        int rowId = item.getId();
-
-        for (Item i :
-                items)
-        {
-            if (i.getId() == rowId)
-            {
-                items.remove(i);
-            }
-        }
     }
 
     public void increaseItem(Item item)
     {
-        int rowId = item.getId();
-
-        for (Item i :
-                items)
+        for (Item i : items)
         {
-            if (i.getId() == rowId)
+            if (i.getId() == item.getId())
             {
-                int qty = i.getQuantity();
-                //Set the new quantity & price
-                i.setQuantity(qty + 1);
+                int qty = i.getQty();
+                i.setQty(qty + 1);
+                return;
             }
         }
 
+        if(BuildConfig.DEBUG)
+            Log.d(TAG, "increaseItem: + 1");
+    }
+
+    public void removeItem(Item item)
+    {
+        if(inRecord(item))
+            items.remove(item);
+
+
+        if(BuildConfig.DEBUG)
+            Log.d(TAG, "Item Removed.");
     }
 
     public void decreaseItem(Item item)
     {
-        int rowId = item.getId();
-
-        for (Item i :
-                items)
+        for (Item i : items)
         {
-            if (i.getId() == rowId)
+            if (i.getId() == item.getId())
             {
-                if (i.getQuantity() > 1)
-                {
-                    int qty = i.getQuantity();
-                    i.setQuantity(qty - 1);
-                } else if (i.getQuantity() == 1)
+                int qty = i.getQty();
+                if (qty == 1)
                 {
                     removeItem(i);
+                    return;
                 }
-
+                i.setQty(qty - 1);
             }
         }
+
+
+        if(BuildConfig.DEBUG)
+            Log.d(TAG, "decreaseItem: - 1");
     }
 
     public int getCartSize()
@@ -109,7 +105,7 @@ public class Cart
         for (Item item :
                 items)
         {
-            Price = Price + (item.getQuantity() * item.getPrice());
+            Price = Price + (item.getQty() * item.getPrice());
         }
 
         return Price;
@@ -122,7 +118,7 @@ public class Cart
         for (Item item :
                 items)
         {
-            tItems = tItems + item.getQuantity();
+            tItems = tItems + item.getQty();
         }
 
         return tItems;

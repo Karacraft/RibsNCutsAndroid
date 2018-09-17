@@ -5,14 +5,19 @@
     <string name="title_activity_mutton">Mutton Cuts</string>
     <string name="title_activity_chicken">Chicken Cuts</string>
     <string name="title_activity_address">Outlet Address</string>
-    <string name="title_show_product_details">Product Details</string>
+    <string name="title_show_product_details">Products</string>
+    <string name="title_activity_orders">Orders</string>
+    <string name="title_activity_profile">Profile</string>
+
 
     <!--Drawer Menu Text-->
-    <string name="menu_all">All</string>
-    <string name="menu_beef">Beef</string>
-    <string name="menu_mutton">Mutton</string>
-    <string name="menu_chicken">Chicken</string>
+    <string name="menu_all">Mix Cuts</string>
+    <string name="menu_beef">Beef Cuts</string>
+    <string name="menu_mutton">Mutton Cuts</string>
+    <string name="menu_chicken">Chicken Cuts</string>
     <string name="menu_address">Address</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_orders">Orders</string>
     <string name="menu_location">Location Map</string>
     <string name="menu_visit_website">Visit Website</string>
 

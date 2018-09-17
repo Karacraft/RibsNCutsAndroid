@@ -30,6 +30,17 @@
             <!--android:icon="@drawable/ic_chicken_black_24"-->
             <!--android:title="@string/menu_chicken" />-->
 
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/menu_profile" />
+
+        <!--<item-->
+            <!--android:id="@+id/nav_orders"-->
+            <!--android:icon="@drawable/ic_book_black_24dp"-->
+            <!--android:title="@string/menu_orders" />-->
+
         <item
             android:id="@+id/nav_address"
             android:icon="@drawable/ic_home_black_24"

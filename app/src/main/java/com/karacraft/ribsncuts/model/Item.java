@@ -3,73 +3,62 @@ package com.karacraft.ribsncuts.model;
 public class Item
 {
 
-    private int Id;
-    private String Title;
-    private String Image;
-    private int Price;
-    private int Quantity;
+    private int id;
+    private String name;
+    private String image;
+    private int price;
+    private int qty;
 
     public Item()
     {
 
     }
 
-    public Item(int id, String title, String image, int price, int quantity)
-    {
-        Id = id;
-        Title = title;
-        Image = image;
-        Price = price;
-        Quantity = quantity;
+    public Item(int id, String name, String image, int price, int qty) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.qty = qty;
     }
 
-    public int getId()
-    {
-        return Id;
+    public int getId() {
+        return id;
     }
 
-    public void setId(int id)
-    {
-        Id = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTitle()
-    {
-        return Title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title)
-    {
-        Title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getImage()
-    {
-        return Image;
+    public String getImage() {
+        return image;
     }
 
-    public void setImage(String image)
-    {
-        Image = image;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public int getPrice()
-    {
-        return Price;
+    public int getPrice() {
+        return price;
     }
 
-    public void setPrice(int price)
-    {
-        Price = price;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public int getQuantity()
-    {
-        return Quantity;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQuantity(int quantity)
-    {
-        Quantity = quantity;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 }

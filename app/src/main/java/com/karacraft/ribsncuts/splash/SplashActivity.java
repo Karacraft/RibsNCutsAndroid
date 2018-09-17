@@ -156,7 +156,9 @@ public class SplashActivity extends AppCompatActivity implements AsyncHttpConnec
     @Override
     public void OnAsyncTaskCompleted(Boolean success, RequestMode requestMode, RequestType requestType, final String result)
     {
-        Log.d(Constants.TAG, "OnAsyncTaskCompleted: SplashActivity " + result);
+        if(BuildConfig.DEBUG)
+            Log.d(Constants.TAG, "OnAsyncTaskCompleted: SplashActivity " + result);
+
         switch (requestType)
         {
             case GET_PRODUCTS:

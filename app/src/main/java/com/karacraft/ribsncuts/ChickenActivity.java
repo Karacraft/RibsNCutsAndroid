@@ -58,9 +58,8 @@ public class ChickenActivity extends Fragment
     {
         //We have Data, inflate the list view
         if (BuildConfig.DEBUG)
-        {
             Log.d(Constants.TAG, "updateListViw: Loading from Sqlite...");
-        }
+
         //Initialize DB
         ProductsDB db = new ProductsDB(getContext());
         //Open Database
@@ -77,9 +76,8 @@ public class ChickenActivity extends Fragment
         else
         {
             if(BuildConfig.DEBUG)
-            {
                 Log.d(Constants.TAG, "updateListView: ListView is Null!");
-            }
+
         }
 
         adapter.notifyDataSetChanged();

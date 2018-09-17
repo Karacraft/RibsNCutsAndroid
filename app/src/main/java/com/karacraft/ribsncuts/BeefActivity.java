@@ -68,9 +68,8 @@ public class BeefActivity extends Fragment
             {
 
                 if(BuildConfig.DEBUG)
-                {
                     Log.d(TAG, "onItemClick: " + values.get(i).getTitle());
-                }
+
 
                 Bundle bundle = new Bundle();
 
@@ -105,9 +104,8 @@ public class BeefActivity extends Fragment
 
         //We have Data, inflate the list view
         if (BuildConfig.DEBUG)
-        {
             Log.d(TAG, "updateListViw: Loading from Sqlite...");
-        }
+
         //Initialize DB
         ProductsDB db = new ProductsDB(getContext());
         //Open Database
@@ -124,9 +122,8 @@ public class BeefActivity extends Fragment
         else
         {
             if(BuildConfig.DEBUG)
-            {
                 Log.d(TAG, "updateListView: ListView is Null!");
-            }
+
         }
 
         adapter.notifyDataSetChanged();
