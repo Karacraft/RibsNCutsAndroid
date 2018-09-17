@@ -3,20 +3,28 @@ package com.karacraft.ribsncuts.helper;
 public class Constants
 {
     public static final String IP_LOCAL = "http://192.168.0.103/";
-//    public static final String PRODUCT_URL = "http://ribsncuts.com/api/products";
-    public static final String PRODUCT_URL = IP_LOCAL +  "ribsncuts/public/api/products";
-    public static final String LATEST_URL = IP_LOCAL +  "api/latest";
-//    public static final String LOGIN_URL = "http://ribsncuts.com/api/login";
-    public static final String LOGIN_URL = IP_LOCAL +  "ribsncuts/public/api/login";
-//    public static final String DETAILS_URL = "http://ribsncuts.com/api/details";
-    public static final String DETAILS_URL = IP_LOCAL +  "ribsncuts/public/api/details";
-//    public static final String REGISTER_URL = "http://ribsncuts.com/api/register";
-    public static final String REGISTER_URL = IP_LOCAL +  "ribsncuts/public/api/register";
-    public static final String IMAGE_URL = "https://ribsncuts.com/images/products/";
-    public static final String PLACE_ORDER_URL = IP_LOCAL +  "ribsncuts/public/api/order";
-//    public static final String PLACE_ORDER_URL = IP_LOCAL +  "http://ribsncuts.com/api/order";
-    public static final String UPDATE_PROFILE_URL = IP_LOCAL +  "ribsncuts/public/api/profile/update";
-//    public static final String UPDATE_PROFILE_URL = IP_LOCAL +  "http://ribsncuts.com/api/profile/update";
+    public static final String IP_PRODUCTION = "https://ribsncuts.com/";
+
+    public static final String PRODUCT_URL = IP_PRODUCTION + "api/products";
+//    public static final String PRODUCT_URL = IP_LOCAL +  "ribsncuts/public/api/products";
+
+    public static final String LOGIN_URL = IP_PRODUCTION + "api/login";
+//    public static final String LOGIN_URL = IP_LOCAL +  "ribsncuts/public/api/login";
+
+    public static final String DETAILS_URL = IP_PRODUCTION + "api/details";
+//    public static final String DETAILS_URL = IP_LOCAL +  "ribsncuts/public/api/details";
+
+    public static final String REGISTER_URL = IP_PRODUCTION + "api/register";
+//    public static final String REGISTER_URL = IP_LOCAL +  "ribsncuts/public/api/register";
+
+    public static final String IMAGE_URL = IP_PRODUCTION + "images/products/";
+//    public static final String IMAGE_URL = IP_LOCAL + "ribsncuts/public/images/products/";
+
+    public static final String PLACE_ORDER_URL = IP_PRODUCTION +  "api/order";
+    //    public static final String PLACE_ORDER_URL = IP_LOCAL +  "ribsncuts/public/api/order";
+
+    public static final String UPDATE_PROFILE_URL = IP_PRODUCTION +  "api/profile/update";
+//    public static final String UPDATE_PROFILE_URL = IP_LOCAL +  "ribsncuts/public/api/profile/update";
 
     /** Application Preferences*/
     public static final String APP_PREF_NAME = "com.karacraft.ribsncuts.prefs";
