@@ -1,6 +1,8 @@
 # RibsNCuts-Android
 ### Ribsncuts Android Application for customers
 
+[Android App]: https://play.google.com/store/apps/details?id=com.karacraft.ribsncuts "Official Ribsncuts App"
+
 Basic idea is to provide the handy information to the client offline.
 After installation , Application attempts to download the data from the website (if fail, then it quits)
 and keep it in sqlite database for offline reading. Use can view and select the items which can then be
