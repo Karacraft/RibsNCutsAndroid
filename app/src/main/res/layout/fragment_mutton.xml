@@ -5,13 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".MuttonActivity">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_products"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lv_mutton_products"
-        >
-        <!--Required to Show list Items-->
-    </ListView>
+        android:layout_height="wrap_content"
+        />
 
     <TextView
         android:id="@+id/empty_mutton"

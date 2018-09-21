@@ -1,6 +1,5 @@
 package com.karacraft.ribsncuts;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -11,9 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.karacraft.ribsncuts.adapter.ProductAdapter;
 import com.karacraft.ribsncuts.cart.Controller;
 import com.karacraft.ribsncuts.helper.AsyncHttpConnectionTask;
 import com.karacraft.ribsncuts.helper.Constants;
@@ -513,7 +511,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void OnItemAddedToCart(Item item)
     {
-        CustomToast.showToastMessage(item.getName() + " added to Cart",MainActivity.this, Toast.LENGTH_SHORT);
+        CustomToast.showToastMessage(item.getName() + " added to Cart",MainActivity.this, 750);
         controller.addItem(item);
         OnCartUpdate(controller.getCartSize());
     }

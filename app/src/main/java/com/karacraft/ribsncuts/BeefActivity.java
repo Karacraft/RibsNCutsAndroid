@@ -2,19 +2,21 @@ package com.karacraft.ribsncuts;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.karacraft.ribsncuts.DB.ProductsDB;
-import com.karacraft.ribsncuts.adapter.ProductListAdapter;
+import com.karacraft.ribsncuts.adapter.ProductAdapter;
 import com.karacraft.ribsncuts.cart.Controller;
 import com.karacraft.ribsncuts.helper.Constants;
+import com.karacraft.ribsncuts.model.Item;
 import com.karacraft.ribsncuts.model.Product;
 
 import java.util.ArrayList;
@@ -28,13 +30,16 @@ import static com.karacraft.ribsncuts.helper.Constants.TAG;
 public class BeefActivity extends Fragment
 {
 
-    /** Global Class*/
+    View empty;
+    View view;
+    ArrayList<Product> values = new ArrayList<Product>();
     Controller controller;
 
-    View empty;
-    ListView lv_beef_products;
-    ArrayList<Product> values = new ArrayList<Product>();
-    ProductListAdapter adapter;
+    RecyclerView recyclerView;
+    RecyclerView.Adapter myAdapter;
+    RecyclerView.LayoutManager layoutManager;
+
+    ICartOperations myInterface;    //to communicate with Parent Acitivity.
 
     public BeefActivity() { /**Required empty public constructor*/ }
 
@@ -45,43 +50,62 @@ public class BeefActivity extends Fragment
         //Setup Title
         getActivity().setTitle(R.string.title_activity_beef);
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_beef, container, false);
-        empty = view.findViewById(R.id.empty_beef);
-        lv_beef_products = view.findViewById(R.id.lv_beef_products);
+        view = inflater.inflate(R.layout.fragment_beef, container, false);
 
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        /** The MainActivity implements this interface
+         * we need it to add items to cart
+         */
+        if(getActivity() instanceof ICartOperations)
+        {
+            myInterface = (ICartOperations) getActivity();
+        }
+
+//        /** Get Global Controller Class object (See application tag in anrdroidmanifest.xml )*/
+//        controller = (Controller) getActivity().getApplicationContext();
+
+        empty = view.findViewById(R.id.empty_beef);
+        recyclerView = view.findViewById(R.id.list_products);
+        recyclerView.setHasFixedSize(true);
 
         empty.setVisibility(View.GONE);
-        lv_beef_products.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+        layoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(layoutManager);
 
         updateListView();
+    }
 
+    public void updateListView()
+    {
+        //Initialize DB
+        ProductsDB db = new ProductsDB(getContext());
+        //Open Database
+        db.open();
+        values = db.readDataInArrayList("Beef");
+        db.close();
 
-        /** Init Global Controller Class object (See applicaiton tag in anrdroidmanifest.xml )*/
-        controller = (Controller) getActivity().getApplicationContext();
-
-
-        /** Set up Clicks for List Items*/
-        lv_beef_products.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        myAdapter = new ProductAdapter(getContext(), values, new ProductAdapter.ItemClicked() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-
-                if(BuildConfig.DEBUG)
-                    Log.d(TAG, "onItemClick: " + values.get(i).getTitle());
-
-
+            public void onItemClicked(int position) {
                 Bundle bundle = new Bundle();
 
-                bundle.putInt(Constants.KEY_ROWID,values.get(i).getId());
-                bundle.putString(Constants.KEY_TITLE,values.get(i).getTitle());
-                bundle.putString(Constants.KEY_CUTSOURCE,values.get(i).getCutSource());
-                bundle.putString(Constants.KEY_BESTFOR,values.get(i).getBestFor());
-                bundle.putString(Constants.KEY_DESCRIPTION,values.get(i).getDescription());
-                bundle.putString(Constants.KEY_SLUG,values.get(i).getSlug());
-                bundle.putString(Constants.KEY_CATEGORY,values.get(i).getCategory());
-                bundle.putString(Constants.KEY_IMAGE,values.get(i).getImage());
-                bundle.putInt(Constants.KEY_PRICEPERKG,values.get(i).getPrice());
+                bundle.putInt(Constants.KEY_ROWID,values.get(position).getId());
+                bundle.putString(Constants.KEY_TITLE,values.get(position).getTitle());
+                bundle.putString(Constants.KEY_CUTSOURCE,values.get(position).getCutSource());
+                bundle.putString(Constants.KEY_BESTFOR,values.get(position).getBestFor());
+                bundle.putString(Constants.KEY_DESCRIPTION,values.get(position).getDescription());
+                bundle.putString(Constants.KEY_SLUG,values.get(position).getSlug());
+                bundle.putString(Constants.KEY_CATEGORY,values.get(position).getCategory());
+                bundle.putString(Constants.KEY_IMAGE,values.get(position).getImage());
+                bundle.putInt(Constants.KEY_PRICEPERKG,values.get(position).getPrice());
 
                 ShowProductActivity showProductActivity = new ShowProductActivity();
                 FragmentManager fragmentManager = getFragmentManager();
@@ -92,43 +116,28 @@ public class BeefActivity extends Fragment
                         .replace(R.id.main_fragment, showProductActivity)
                         .commit();
             }
+
+            @Override
+            public void onAddButtonClicked(int position)
+            {
+                Item item = new Item(values.get(position).getId(),values.get(position).getTitle(),values.get(position).getImage(),values.get(position).getPrice(),1);
+                myInterface.OnItemAddedToCart(item);
+            }
         });
-
-        return  view;
-    }
-
-
-
-    public void updateListView()
-    {
-
-        //We have Data, inflate the list view
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, "updateListViw: Loading from Sqlite...");
-
-        //Initialize DB
-        ProductsDB db = new ProductsDB(getContext());
-        //Open Database
-        db.open();
-        values = db.readDataInArrayList("Beef");
-        db.close();
-
-        adapter = new ProductListAdapter(getContext(),values,Constants.LIST_PARTIAL);
-
-        if (lv_beef_products != null)
+        //Set Adapter for RecyclerView
+        if (recyclerView != null)
         {
-            lv_beef_products.setAdapter(adapter);
+            recyclerView.setAdapter(myAdapter);
         }
-        else
-        {
+        else {
             if(BuildConfig.DEBUG)
                 Log.d(TAG, "updateListView: ListView is Null!");
-
         }
-
-        adapter.notifyDataSetChanged();
     }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        myAdapter.notifyDataSetChanged();
+    }
 }

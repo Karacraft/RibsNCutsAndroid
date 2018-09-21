@@ -1,122 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
     <android.support.v7.widget.CardView
+        xmlns:card-view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
+        app:cardUseCompatPadding="false"
         app:contentPadding="-8dp"
         android:layout_gravity="center"
         android:layout_margin="@dimen/small_margin"
         >
 
-        <RelativeLayout
-            android:orientation="vertical"
-            android:background="@color/colorBlack"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="@color/colorBlack"
+            android:orientation="vertical">
 
 
             <TextView
                 android:id="@+id/tv_product_title"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:textAllCaps="true"
                 android:paddingBottom="@dimen/small_padding"
                 android:paddingLeft="@dimen/medium_padding"
                 android:paddingTop="@dimen/small_padding"
                 android:text="This is Product Title"
+                android:textAllCaps="true"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/medium_font_size" />
+                android:textSize="@dimen/medium_font_size"
+                card-view:layout_constraintEnd_toEndOf="parent"
+                card-view:layout_constraintStart_toStartOf="parent"
+                card-view:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
 
                 android:id="@+id/img_product_image"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_product_title"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_image_placeholder_256" />
-
+                android:src="@drawable/ic_image_placeholder_256"
+                card-view:layout_constraintEnd_toEndOf="parent"
+                card-view:layout_constraintHorizontal_bias="0.0"
+                card-view:layout_constraintStart_toStartOf="parent"
+                card-view:layout_constraintTop_toBottomOf="@+id/tv_product_title" />
 
 
             <TextView
                 android:id="@+id/tvBFTitle"
-                android:background="@drawable/custom_textview"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_product_image"
-                android:layout_marginLeft="@dimen/medium_padding"
-                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_textview"
                 android:text="Best For"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/base_font_size" />
+                android:textSize="@dimen/base_font_size"
+                card-view:layout_constraintStart_toStartOf="parent"
+                card-view:layout_constraintTop_toBottomOf="@+id/img_product_image" />
 
             <TextView
                 android:id="@+id/tv_product_best_for"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_product_image"
-                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_toRightOf="@id/tvBFTitle"
                 android:paddingLeft="@dimen/xs_padding"
                 android:paddingTop="@dimen/xxs_padding"
                 android:text="Best For Cooking"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/base_font_size" />
+                android:textSize="@dimen/base_font_size"
+                card-view:layout_constraintStart_toEndOf="@+id/tvBFTitle"
+                card-view:layout_constraintTop_toBottomOf="@+id/img_product_image" />
 
             <TextView
                 android:id="@+id/tvPriceTitle"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_product_best_for"
-                android:layout_marginBottom="@dimen/small_padding"
-                android:layout_marginLeft="@dimen/medium_padding"
-                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/custom_textview"
                 android:text="Price Rs"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/base_font_size" />
+                android:textSize="@dimen/base_font_size"
+                card-view:layout_constraintBottom_toBottomOf="parent"
+                card-view:layout_constraintStart_toStartOf="parent"
+                card-view:layout_constraintTop_toBottomOf="@+id/tvBFTitle" />
 
             <TextView
                 android:id="@+id/tv_product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_product_best_for"
-                android:layout_marginBottom="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_toRightOf="@id/tvPriceTitle"
                 android:paddingLeft="@dimen/xs_padding"
                 android:paddingTop="@dimen/xxs_padding"
                 android:text="Rs 600"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/base_font_size" />
+                android:textSize="@dimen/base_font_size"
+                card-view:layout_constraintBottom_toBottomOf="parent"
+                card-view:layout_constraintStart_toEndOf="@+id/tvPriceTitle"
+                card-view:layout_constraintTop_toBottomOf="@+id/tv_product_best_for" />
 
             <Button
                 android:id="@+id/btnAddToCartProductList"
-                android:layout_below="@id/tv_product_title"
-                android:layout_alignParentRight="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="24dp"
                 android:background="@color/success"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:text="@string/btnPlusBuy"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/large_font_size"
                 android:textStyle="bold"
-                android:text="@string/btnPlusBuy"
-                android:layout_marginTop="96dp"
-                android:layout_marginRight="@dimen/medium_margin"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
+                app:layout_constraintBottom_toBottomOf="@id/img_product_image"
+                app:layout_constraintTop_toTopOf="@id/img_product_image"
+                card-view:layout_constraintRight_toRightOf="@id/img_product_image" />
 
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
 
     </android.support.v7.widget.CardView>
 
-</FrameLayout>
+</LinearLayout>
