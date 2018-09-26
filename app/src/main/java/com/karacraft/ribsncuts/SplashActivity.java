@@ -1,18 +1,13 @@
-package com.karacraft.ribsncuts.splash;
+package com.karacraft.ribsncuts;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.karacraft.ribsncuts.BuildConfig;
 import com.karacraft.ribsncuts.DB.ProductsDB;
-import com.karacraft.ribsncuts.MainActivity;
-import com.karacraft.ribsncuts.R;
 import com.karacraft.ribsncuts.cart.Controller;
 import com.karacraft.ribsncuts.helper.AsyncHttpConnectionTask;
 import com.karacraft.ribsncuts.helper.Constants;
@@ -24,11 +19,10 @@ import com.karacraft.ribsncuts.helper.SharePref;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class SplashActivity extends AppCompatActivity implements AsyncHttpConnectionTask.AsyncHCTCallback
+public class SplashActivity extends BaseActivity implements AsyncHttpConnectionTask.AsyncHCTCallback
 {
 
     boolean firstAttempt = false;  //If there is data in Sqlite
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,8 +35,8 @@ public class SplashActivity extends AppCompatActivity implements AsyncHttpConnec
 
 
         /** Get Global Controller Class object (See application tag in AndroidManifest.xml )*/
-        final Controller controller = (Controller) getApplicationContext();
-        controller.clearCart();
+//        final Controller controller = (Controller) getApplicationContext();
+//        controller.clearCart();
 
         /** All Set up , now download the data form Internet.
          *
@@ -147,6 +141,7 @@ public class SplashActivity extends AppCompatActivity implements AsyncHttpConnec
         }
         catch (Exception e)
         {
+            disableProgressDialog();
             e.printStackTrace();
         }
 
@@ -175,7 +170,7 @@ public class SplashActivity extends AppCompatActivity implements AsyncHttpConnec
                         @Override
                         public void run()
                         {
-                            CustomToast.showToastMessage("Unable to fetch data. Quitting application",SplashActivity.this,Toast.LENGTH_LONG);
+                            showToastMessage("Unable to fetch data. Quitting application",Toast.LENGTH_LONG);
 
                             if(BuildConfig.DEBUG)
                                 Log.d(Constants.TAG, "Downloading Failed:  " + result);
@@ -226,20 +221,5 @@ public class SplashActivity extends AppCompatActivity implements AsyncHttpConnec
         }
     };
 
-    public void enableProgressDialog(String message)
-    {
-        /** Show ProgressDialog */
-        progressDialog = new ProgressDialog(SplashActivity.this);
-        progressDialog.setMessage(message);
-        progressDialog.show();
-    }
 
-    public void disableProgressDialog()
-    {
-        /** Dismiss the Progress Dialog **/
-        if (progressDialog != null && progressDialog.isShowing())
-        {
-            progressDialog.dismiss();
-        }
-    }
 }

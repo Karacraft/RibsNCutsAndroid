@@ -1,6 +1,5 @@
 package com.karacraft.ribsncuts;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -13,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,7 +25,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.karacraft.ribsncuts.adapter.ProductAdapter;
 import com.karacraft.ribsncuts.cart.Controller;
 import com.karacraft.ribsncuts.helper.AsyncHttpConnectionTask;
 import com.karacraft.ribsncuts.helper.Constants;
@@ -44,14 +41,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity implements
+public class MainActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         AsyncHttpConnectionTask.AsyncHCTCallback ,
         ICartOperations
 {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
-    ProgressDialog progressDialog;      //Progress Dialog to be shown during long operations
+
     Controller controller;              //Cart Data Operations
 
     Toolbar toolbar;                    //Shows our Navigation Drawer Icon
@@ -72,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements
 
         /** Get Global Controller Class object (See applicaiton tag in anrdroidmanifest.xml )*/
         controller = (Controller) getApplicationContext();
+        controller.clearCart();
 
         /** Setup Toolbar */
         toolbar = findViewById(R.id.main_toolbar); //In toolbar_main.xml
@@ -289,7 +287,8 @@ public class MainActivity extends AppCompatActivity implements
             if(isUserLoggedIn())
             {
                 logOutUser();
-                CustomToast.showToastMessage("User logged out..",MainActivity.this,Toast.LENGTH_SHORT);
+                showToastMessage("User logged out...",Toast.LENGTH_SHORT);
+//                CustomToast.showToastMessage("User logged out..",MainActivity.this,Toast.LENGTH_SHORT);
                 return true;
             }
             showLoginAlertDialog();
@@ -300,7 +299,8 @@ public class MainActivity extends AppCompatActivity implements
 
             if (controller.isCartEmpty())
             {
-                CustomToast.showToastMessage("Cart is Empty",MainActivity.this,Toast.LENGTH_SHORT);
+                showToastMessage("Cart is Empty",Toast.LENGTH_SHORT);
+//                CustomToast.showToastMessage("Cart is Empty",MainActivity.this,Toast.LENGTH_SHORT);
             }
             else
             {
@@ -511,7 +511,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void OnItemAddedToCart(Item item)
     {
-        CustomToast.showToastMessage(item.getName() + " added to Cart",MainActivity.this, 750);
+        showToastMessage(item.getName() + " added to Cart", 750);
         controller.addItem(item);
         OnCartUpdate(controller.getCartSize());
     }
@@ -594,7 +594,7 @@ public class MainActivity extends AppCompatActivity implements
             public void run()
             {
             //TODO::Show Dialog
-            CustomToast.showToastMessage("Please update your profile before posting an order",MainActivity.this,Toast.LENGTH_LONG);
+            showToastMessage("Please update your profile before posting an order",Toast.LENGTH_LONG);
             }
         });
 
@@ -654,23 +654,6 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-    }
-
-    void enableProgressDialog(String message)
-    {
-        /** Show ProgressDialog */
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage(message);
-        progressDialog.show();
-    }
-
-    void disableProgressDialog()
-    {
-        /** Dismiss the Progress Dialog **/
-        if (progressDialog != null && progressDialog.isShowing())
-        {
-            progressDialog.dismiss();
-        }
     }
 
     boolean isUserLoggedIn()

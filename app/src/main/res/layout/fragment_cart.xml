@@ -1,103 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CartActivity"
-    android:weightSum="14"
-    android:orientation="vertical"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    tools:context=".CartActivity">
 
     <ListView
-        android:layout_weight="12"
-        android:visibility="gone"
         android:id="@+id/lv_cart_items"
-        android:layout_marginBottom="@dimen/medium_margin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:divider="@color/colorCommonBorders"
-        android:dividerHeight="4dp">
+        android:dividerHeight="4dp"
+        android:headerDividersEnabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/cart_act_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <!--Required to Show list Items-->
 
     </ListView>
 
-    <RelativeLayout
-        android:layout_weight="2"
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/cart_act_buttons"
-        android:layout_alignParentBottom="true"
-        android:padding="@dimen/small_padding"
-        android:background="@color/colorBlack"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <LinearLayout
-            android:id="@+id/cartLayoutTop"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cart_qty_total_items"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_cart_total_items"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="QTY"
-                android:textColor="@color/colorWhite" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cart_grand_total_price"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_cart_total_in_pkr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="PKR"
-                android:textColor="@color/colorWhite" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_below="@id/cartLayoutTop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnClearMainCart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_cart_clear"
-                android:theme="@style/AppTheme.ButtonDanger" />
-
-            <Button
-                android:id="@+id/btnCartPlaceOrder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_cart_place_order"
-                android:theme="@style/AppTheme.ButtonSuccess" />
-
-        </LinearLayout>
+        android:layout_height="82dp"
+        android:background="@color/colorBlack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/cart_qty_total_items"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tv_cart_total_items"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_cart_total_items"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:text="QTY"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toStartOf="@+id/textView14"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cart_grand_total_price"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tv_cart_total_in_pkr"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_cart_total_items"
+            app:layout_constraintTop_toTopOf="@+id/tv_cart_total_items" />
+
+        <TextView
+            android:id="@+id/tv_cart_total_in_pkr"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="PKR"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/textView14" />
 
 
-</LinearLayout>
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="btnClearMainCart"
+            tools:layout_editor_absoluteY="152dp" />
+
+        <Button
+            android:id="@+id/btnClearMainCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/btn_cart_clear"
+            android:theme="@style/AppTheme.ButtonDanger"
+            app:layout_constraintEnd_toStartOf="@+id/btnCartPlaceOrder"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCartPlaceOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/btn_cart_place_order"
+            android:theme="@style/AppTheme.ButtonSuccess"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnClearMainCart"
+            app:layout_constraintTop_toTopOf="@+id/btnClearMainCart" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="cart_act_buttons"
+        tools:layout_editor_absoluteY="567dp" />
+
+
+</android.support.constraint.ConstraintLayout>

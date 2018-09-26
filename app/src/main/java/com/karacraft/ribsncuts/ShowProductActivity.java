@@ -102,7 +102,7 @@ public class ShowProductActivity extends Fragment
 //                controller.addItem(item);
                 myInterface.OnItemAddedToCart(item);
                 myInterface.OnCartUpdate(controller.getCartSize());
-                CustomToast.showToastMessage(item.getName() +" added to cart.", getContext(), Toast.LENGTH_SHORT);
+                ((BaseActivity)getActivity()).showToastMessage(item.getName() +" added to cart.", Toast.LENGTH_SHORT);
 
                 if(BuildConfig.DEBUG)
                     Log.d(TAG, "Cart Items[Unique]: " + controller.getUniqueItems() + " Items[Total]: " + controller.getTotalItems() + " Price: " + controller.getTotalPrice());

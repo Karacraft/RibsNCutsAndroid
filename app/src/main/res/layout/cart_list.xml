@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,85 +11,117 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="-8dp">
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="2dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="false">
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin">
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.Barrier
+                android:id="@+id/barrierImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="iv_item_image"
+                tools:layout_editor_absoluteX="360dp" />
 
             <ImageView
                 android:id="@+id/iv_item_image"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="80dp"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:src="@drawable/ic_email_black_gray_24dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_email_black_gray_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:maxLength="25"
+                android:text="Some Nihari"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.Barrier
+                android:id="@+id/barrierPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:layout_toRightOf="@id/iv_item_image"
-                android:maxLength="40"
-                android:text="Some Nihari" />
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tv_item_price"
+                tools:layout_editor_absoluteY="88dp" />
 
             <TextView
                 android:id="@+id/tv_item_price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_item_title"
-                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_toRightOf="@id/iv_item_image"
-                android:text="600" />
+                android:text="600"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_item_image"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_title" />
 
-            <RelativeLayout
-                android:padding="0dp"
-                android:layout_margin="0dp"
-                android:layout_below="@id/tv_item_price"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:layout_toRightOf="@id/iv_item_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnIncreaseItem"
+                android:layout_width="40dp"
+                android:layout_height="44dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="+"
+                android:theme="@style/AppTheme.ButtonSuccess"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_item_image"
+                app:layout_constraintTop_toTopOf="@+id/barrierPrice" />
 
-                <Button
-                    android:id="@+id/btnIncreaseItem"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:text="+"
-                    android:theme="@style/AppTheme.ButtonSuccess" />
+            <TextView
+                android:id="@+id/tv_item_qty"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_toRightOf="@id/btnIncreaseItem"
+                android:gravity="center"
+                android:maxLength="20"
+                android:text="Qty"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnIncreaseItem"
+                app:layout_constraintTop_toTopOf="@+id/barrierPrice" />
 
-                <TextView
-                    android:id="@+id/tv_item_qty"
-                    android:layout_toRightOf="@id/btnIncreaseItem"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:maxLength="20"
-                    android:text="Qty"/>
+            <Button
+                android:id="@+id/btnDecreaseItem"
+                android:layout_width="40dp"
+                android:layout_height="44dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_toRightOf="@id/tv_item_qty"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="-"
+                android:theme="@style/AppTheme.ButtonDanger"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_qty"
+                app:layout_constraintTop_toTopOf="@+id/barrierPrice" />
 
-
-                <Button
-                    android:id="@+id/btnDecreaseItem"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_toRightOf="@id/tv_item_qty"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:text="-"
-                    android:theme="@style/AppTheme.ButtonDanger" />
-
-            </RelativeLayout>
-
-
-
-
-        </RelativeLayout>
-
+        </android.support.constraint.ConstraintLayout>
 
 
     </android.support.v7.widget.CardView>

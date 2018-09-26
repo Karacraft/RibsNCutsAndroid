@@ -34,7 +34,7 @@ import static com.karacraft.ribsncuts.helper.Constants.TAG;
  */
 public class ProfileActivity extends Fragment implements AsyncHttpConnectionTask.AsyncHCTCallback{
 
-    RelativeLayout lvShowProfile;
+    ConstraintLayout lvShowProfile;
     TextView tvEmptyProfile;
     TextView tv_userEmail,tv_userName;
     EditText et_userAddress,et_userContact;
@@ -56,7 +56,7 @@ public class ProfileActivity extends Fragment implements AsyncHttpConnectionTask
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         //Setup Title
-        getActivity().setTitle(R.string.title_activity_all);
+        getActivity().setTitle(R.string.title_activity_profile);
 
         lvShowProfile = view.findViewById(R.id.lv_showProfile);
         tvEmptyProfile = view.findViewById(R.id.tv_emptyProfile);
@@ -98,7 +98,7 @@ public class ProfileActivity extends Fragment implements AsyncHttpConnectionTask
                     return;
                 }
 
-                enableProgressDialog("Updating profile. Please wait...");
+                ((BaseActivity)getActivity()).enableProgressDialog("Updating profile. Please wait...");
                 setUpProfileData();
                 //Update on Server
                 Map<String, String> postData = new HashMap<>();
@@ -166,22 +166,7 @@ public class ProfileActivity extends Fragment implements AsyncHttpConnectionTask
         return false;
     }
 
-    public void enableProgressDialog(String message)
-    {
-        /** Show ProgressDialog */
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage(message);
-        progressDialog.show();
-    }
 
-    public void disableProgressDialog()
-    {
-        /** Dismiss the Progress Dialog **/
-        if (progressDialog != null && progressDialog.isShowing())
-        {
-            progressDialog.dismiss();
-        }
-    }
 
     @Override
     public void OnAsyncTaskCompleted(Boolean success, RequestMode requestMode, RequestType requestType, String result) {
@@ -189,7 +174,7 @@ public class ProfileActivity extends Fragment implements AsyncHttpConnectionTask
         if(BuildConfig.DEBUG)
             Log.d(Constants.TAG, "OnAsyncTaskCompleted: ProfileActivity " + result);
 
-        disableProgressDialog();
+        ((BaseActivity)getActivity()).disableProgressDialog();
 
         switch (requestType)
         {
@@ -202,7 +187,7 @@ public class ProfileActivity extends Fragment implements AsyncHttpConnectionTask
                         @Override
                         public void run()
                         {
-                            CustomToast.showToastMessage("Profile Updated.",getActivity(),Toast.LENGTH_SHORT);
+                            ((BaseActivity)getActivity()).showToastMessage("Profile Updated.",Toast.LENGTH_SHORT);
                         }
                     });
                     Log.d(TAG, "OnAsyncTaskCompleted: Completed");
@@ -214,7 +199,7 @@ public class ProfileActivity extends Fragment implements AsyncHttpConnectionTask
                         @Override
                         public void run()
                         {
-                            CustomToast.showToastMessage("Unable to fullfill request. Try again later.",getActivity(),Toast.LENGTH_SHORT);
+                            ((BaseActivity)getActivity()).showToastMessage("Unable to fullfill request. Try again later.",Toast.LENGTH_SHORT);
                         }
                     });
 //                    operationFailed();

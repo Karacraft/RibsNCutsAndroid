@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/small_margin">
@@ -10,14 +12,13 @@
         android:layout_height="wrap_content"
         android:scrollIndicators="top|bottom">
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_alignParentTop="true"
                 android:id="@+id/tv_product_title_full"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:paddingBottom="@dimen/small_padding"
@@ -26,71 +27,105 @@
                 android:text="This is Product Title"
                 android:textAllCaps="true"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/medium_font_size" />
+                android:textSize="@dimen/medium_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
 
                 android:id="@+id/iv_product_image_full"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_product_title_full"
                 android:adjustViewBounds="true"
                 android:background="@color/colorBlack"
                 android:cropToPadding="false"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_image_placeholder_256" />
+                android:src="@drawable/ic_image_placeholder_256"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_product_title_full" />
 
             <TextView
                 android:id="@+id/TextViewDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_product_image_full"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/small_padding"
                 android:text="Description"
                 android:textAllCaps="true"
                 android:textSize="@dimen/medium_font_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_product_image_full" />
 
             <TextView
                 android:id="@+id/tv_description_full"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TextViewDesc"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/small_padding"
                 android:text="Description"
-                android:textSize="@dimen/medium_font_size" />
+                android:textSize="@dimen/medium_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextViewDesc" />
 
             <TextView
                 android:id="@+id/TextViewPrice"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_description_full"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/small_padding"
                 android:text="Price Rs"
                 android:textAllCaps="true"
                 android:textSize="@dimen/medium_font_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddToCart"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description_full" />
 
             <TextView
                 android:id="@+id/tv_price_full"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/TextViewPrice"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/small_padding"
                 android:text="Rs 600"
-                android:textSize="@dimen/medium_font_size" />
+                android:textSize="@dimen/medium_font_size"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddToCart"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextViewPrice" />
+
+            <Button
+                android:id="@+id/btnAddToCart"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/btnAddToCart"
+                android:theme="@style/AppTheme.ButtonSuccess"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_price_full"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description_full" />
 
 
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
-
-    <Button
-        android:layout_gravity="bottom"
-        android:id="@+id/btnAddToCart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btnAddToCart"
-        android:theme="@style/AppTheme.ButtonSuccess" />
 
 </FrameLayout>

@@ -1,6 +1,7 @@
 package com.karacraft.ribsncuts;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,7 +43,7 @@ public class CartActivity extends Fragment implements CartItemListAdapter.IDataC
     CartItemListAdapter adapter;
     ICartOperations myInterface;
 
-    ProgressDialog progressDialog;      //Progress Dialog to be shown during long operations
+//    ProgressDialog progressDialog;      //Progress Dialog to be shown during long operations
 
     ListView lv_cart_items;
     Controller controller;
@@ -112,11 +113,12 @@ public class CartActivity extends Fragment implements CartItemListAdapter.IDataC
 
         if (token.isEmpty())
         {
-            CustomToast.showToastMessage("Please Login to RibsnCuts server first, then place order",getContext(),Toast.LENGTH_SHORT);
+            ((BaseActivity)getActivity()).showToastMessage("Please login to Ribsncuts Server first. Then place order",Toast.LENGTH_SHORT);
+//            CustomToast.showToastMessage("Please Login to RibsnCuts server first, then place order",getContext(),Toast.LENGTH_SHORT);
             return;
         }
         //Enable Progress Dialog
-        enableProgressDialog("Posting Order...Please wait");
+        ((BaseActivity)getActivity()).enableProgressDialog("Posting Order...Please wait");
 
         try {
 
@@ -231,7 +233,7 @@ public class CartActivity extends Fragment implements CartItemListAdapter.IDataC
         if(BuildConfig.DEBUG)
             Log.d(Constants.TAG, "OnAsyncTaskCompleted: CartActivity " + result);
 
-        disableProgressDialog();
+        ((BaseActivity)getActivity()).disableProgressDialog();
 
         switch (requestType)
         {
@@ -254,23 +256,6 @@ public class CartActivity extends Fragment implements CartItemListAdapter.IDataC
         }
     }
 
-    public void enableProgressDialog(String message)
-    {
-        /** Show ProgressDialog */
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage(message);
-        progressDialog.show();
-    }
-
-    public void disableProgressDialog()
-    {
-        /** Dismiss the Progress Dialog **/
-        if (progressDialog != null && progressDialog.isShowing())
-        {
-            progressDialog.dismiss();
-        }
-    }
-
     void clearCartView(){
         controller.clearCart();
         /** Display Message of Failure */
@@ -282,7 +267,7 @@ public class CartActivity extends Fragment implements CartItemListAdapter.IDataC
                 myInterface.OnOrderPostSuccessful();
                 adapter.notifyDataSetChanged();
                 updatePriceAndTotalItems();
-                CustomToast.showToastMessage("Order Placed. Please check your email for details.",getActivity(),Toast.LENGTH_SHORT);
+                ((BaseActivity)getActivity()).showToastMessage("Order Placed. Please check your email for details.",Toast.LENGTH_SHORT);
                 //TODO::Add the profile,order & details to a txt file and keep it for reference
             }
         });
@@ -296,7 +281,8 @@ public class CartActivity extends Fragment implements CartItemListAdapter.IDataC
             @Override
             public void run()
             {
-                CustomToast.showToastMessage("Unable to place your order. Please try later.",getActivity(),Toast.LENGTH_SHORT);
+                ((BaseActivity)getActivity()).showToastMessage("Unable to place your order. Please try later.",Toast.LENGTH_SHORT);
+//                CustomToast.showToastMessage("Unable to place your order. Please try later.",getActivity(),Toast.LENGTH_SHORT);
             }
         });
 
